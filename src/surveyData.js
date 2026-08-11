@@ -1,0 +1,302 @@
+export const TYPE_META = {
+  slow: { short: '슬로우', name: '슬로우 무드형', core: '체류, 편안함, 휴식, 여유' },
+  visual: { short: '비주얼', name: '디저트 비주얼형', core: '메뉴 비주얼, 먹고 싶은 욕구, 메뉴 중심 즐거움' },
+  story: { short: '서사', name: '운영자 서사형', core: '사람, 운영 과정, 브랜드 배경, 관계' },
+  archive: { short: '아카이브', name: '취향 아카이브형', core: '공간 미감, 독특함, 콘셉트, 취향' },
+  expert: { short: '전문성', name: '전문성형', core: '재료, 제조 과정, 품질 근거, 신뢰' },
+  event: { short: '이벤트', name: '경험 이벤트형', core: '한정성, 새로움, 시즌, 팝업, 지금만 가능한 경험' },
+};
+
+
+
+export const RESULT_META = {
+  slow: {
+    subtitle: '카페에서 쉬는 시간을 가장 잘 고르는 사람',
+    quote: '좋은 카페는 오래 있어도 편안한 곳이에요.',
+    tags: ['#편안한자리', '#조용한무드', '#오래머물기'],
+    description: '카페를 고를 때 화려함보다 머무는 동안의 편안함을 먼저 봐요. 좌석, 소음, 동선처럼 실제 체류 경험을 중요하게 생각하고, 마음이 지친 날 다시 찾을 수 있는 공간을 오래 기억하는 편이에요.',
+    behaviors: [['자리 확인', '앉아서 오래 있어도 편한지 먼저 체크'], ['머무는 시간', '급하게 나가기보다 천천히 쉬는 편'], ['친구 추천', '“여기 오래 있기 편해”가 핵심']],
+    secondaryCopy: '편안함 외에도 두 번째 취향이 카페 선택을 은근히 좌우해요.',
+    browse: '오래 머무는 편안함이 1순위',
+  },
+  visual: {
+    subtitle: '먹고 싶은 순간을 놓치지 않는 사람',
+    quote: '카페는 결국 “이거 먹고 싶다”가 제일 강해요.',
+    tags: ['#메뉴비주얼', '#디저트저장', '#먹킷리스트'],
+    description: '카페 콘텐츠에서 메뉴가 주는 첫인상에 빠르게 반응해요. 맛있어 보이는 비주얼은 저장과 방문으로 바로 이어지고, 한 번 만족한 곳에서는 다른 메뉴까지 궁금해지는 편이에요.',
+    behaviors: [['스크롤 멈춤', '메뉴가 눈에 들어오면 바로 정지'], ['저장 버튼', '먹고 싶은 메뉴면 일단 저장'], ['친구 추천', '“이 메뉴는 꼭 먹어봐”부터 말함']],
+    secondaryCopy: '메뉴 취향에 더해 두 번째 취향이 실제 방문 결정을 완성해요.',
+    browse: '보자마자 먹고 싶어야 저장',
+  },
+  story: {
+    subtitle: '카페 뒤의 사람과 이야기에 끌리는 사람',
+    quote: '좋아하게 되는 건 공간보다 그곳을 만든 이유예요.',
+    tags: ['#브랜드이야기', '#운영자취향', '#응원하고싶은곳'],
+    description: '누가 어떤 마음으로 카페를 만들었는지 알게 될수록 관심이 깊어져요. 운영 과정과 브랜드 배경이 보이면 계정까지 찾아보고, 마음이 간 카페는 단순 방문을 넘어 응원하고 싶어지는 편이에요.',
+    behaviors: [['프로필 탐색', '운영자와 브랜드 소개까지 찾아봄'], ['콘텐츠 몰입', '비하인드와 만드는 과정을 끝까지 봄'], ['재방문', '카페가 더 궁금해져 다시 찾음']],
+    secondaryCopy: '사람과 이야기 외에 두 번째 취향이 실제 선택 기준을 보완해요.',
+    browse: '카페보다 사람의 이야기에 끌림',
+  },
+  archive: {
+    subtitle: '공간에 취향을 수집하는 사람',
+    quote: '“예쁜 카페”보다 “내 취향인 카페”가 더 중요해요.',
+    tags: ['#공간취향', '#숨은카페', '#일단저장'],
+    description: '공간의 색감, 가구, 소품까지 은근히 다 보는 편이에요. 유명해서 가기보다 “여긴 내 취향이다” 싶은 곳에 더 끌리고, 마음에 든 카페는 머릿속 취향 폴더에 차곡차곡 저장해둬요.',
+    behaviors: [['입장 10초', '메뉴판보다 공간부터 한 바퀴'], ['저장 버튼', '분위기 취향이면 일단 저장'], ['친구 추천', '“여기 너 좋아할 것 같아”가 기준']],
+    secondaryCopy: '취향만큼 두 번째 유형의 가치도 놓치지 않아요.',
+    browse: '공간과 콘셉트가 취향이면 저장',
+  },
+  expert: {
+    subtitle: '좋은 메뉴의 근거까지 확인하는 사람',
+    quote: '맛있어 보이는 것보다 “왜 좋은지”가 궁금해요.',
+    tags: ['#재료확인', '#제조과정', '#품질신뢰'],
+    description: '메뉴를 고를 때 재료, 원두, 제조 방식처럼 품질을 설명해주는 정보에 신뢰를 느껴요. 보기 좋은 콘텐츠보다 구체적인 근거가 있을 때 저장하고, 실제 방문에서도 기대한 품질이 맞는지를 중요하게 봐요.',
+    behaviors: [['정보 탐색', '원두·재료·제조 방식까지 확인'], ['방문 결정', '품질을 믿을 근거가 있으면 움직임'], ['재방문', '퀄리티가 일정하면 다시 선택']],
+    secondaryCopy: '품질 기준에 더해 두 번째 취향이 카페의 매력을 판단하게 해요.',
+    browse: '재료와 만드는 방식까지 확인',
+  },
+  event: {
+    subtitle: '지금만 가능한 경험에 빠르게 움직이는 사람',
+    quote: '나중보다 지금. 놓치면 아쉬운 경험에 약해요.',
+    tags: ['#기간한정', '#팝업소식', '#지금가야함'],
+    description: '시즌 메뉴, 팝업, 기간 한정처럼 시간이 정해진 경험에 특히 반응해요. 새로운 소식을 보면 저장만 하기보다 일정부터 확인하고, 조금 멀어도 지금 아니면 못 하는 경험이라면 직접 찾아가는 편이에요.',
+    behaviors: [['소식 발견', '종료 날짜와 일정부터 확인'], ['방문 속도', '기간 한정이면 행동이 빨라짐'], ['친구 공유', '“이거 끝나기 전에 가자”라고 보냄']],
+    secondaryCopy: '새로운 경험에 더해 두 번째 취향이 어디로 갈지 결정해요.',
+    browse: '지금만 가능하면 일단 가야 함',
+  },
+};
+
+export const PART1_QUESTIONS = [
+  {
+    id: 'P1Q1',
+    question: '평소 카페를 가장 많이 이용하는 목적은 무엇인가요?',
+    options: ['공부·과제', '휴식', '친구와의 만남', '음료·디저트', '새로운 카페 탐방', '기타'],
+  },
+  {
+    id: 'P1Q2',
+    question: '평소 일주일에 카페를 얼마나 이용하나요?',
+    options: ['거의 이용하지 않는다', '1회 정도', '2~3회', '4회 이상'],
+  },
+  {
+    id: 'P1Q3',
+    question: '새로운 카페를 가장 자주 발견하는 곳은 어디인가요?',
+    options: ['인스타그램', '네이버 지도', '블로그', '유튜브·릴스', '지인 추천', '기타'],
+  },
+  {
+    id: 'P1Q4',
+    question: '카페 관련 게시물을 저장하는 편인가요?',
+    options: ['거의 저장하지 않는다', '가끔 저장한다', '자주 저장한다', '매우 자주 저장한다'],
+  },
+  {
+    id: 'P1Q5',
+    question: '카페 콘텐츠를 본 뒤 실제 방문까지 이어지는 편인가요?',
+    options: ['거의 방문하지 않는다', '가끔 방문한다', '자주 방문한다', '매우 자주 방문한다'],
+  },
+];
+
+export const PART2_QUESTIONS = [
+  {
+    id: 'P2Q1', stage: '최초 주목', question: '카페 게시물을 넘기다가 멈추게 되는 순간은?',
+    options: [
+      { key: 'A', text: '재료나 만드는 과정이 자세히 보일 때', type: 'expert' },
+      { key: 'B', text: '기간 한정이나 팝업 소식이 보일 때', type: 'event' },
+      { key: 'C', text: '공간의 콘셉트가 한눈에 들어올 때', type: 'archive' },
+      { key: 'D', text: '카페를 만든 사람의 이야기가 보일 때', type: 'story' },
+    ],
+  },
+  {
+    id: 'P2Q2', stage: '저장 동기', question: '나중에 다시 보려고 저장하고 싶은 게시물은?',
+    options: [
+      { key: 'A', text: '메뉴의 재료나 만드는 정보가 잘 정리된 게시물', type: 'expert' },
+      { key: 'B', text: '먹고 싶은 메뉴가 눈에 확 들어오는 게시물', type: 'visual' },
+      { key: 'C', text: '곧 끝나는 한정 메뉴나 행사 게시물', type: 'event' },
+      { key: 'D', text: '공간 분위기가 내 취향인 게시물', type: 'archive' },
+    ],
+  },
+  {
+    id: 'P2Q3', stage: '콘텐츠 몰입', question: '가장 끝까지 보게 되는 카페 콘텐츠는?',
+    options: [
+      { key: 'A', text: '카페를 운영하는 과정이나 비하인드', type: 'story' },
+      { key: 'B', text: '팝업이나 시즌 행사를 보여주는 콘텐츠', type: 'event' },
+      { key: 'C', text: '재료 선택이나 만드는 방식을 설명하는 콘텐츠', type: 'expert' },
+      { key: 'D', text: '메뉴의 비주얼을 자세히 보여주는 콘텐츠', type: 'visual' },
+    ],
+  },
+  {
+    id: 'P2Q4', stage: '추가 탐색', question: '카페 계정의 프로필까지 들어가 보게 되는 이유는?',
+    options: [
+      { key: 'A', text: '공간 사진을 더 보고 싶어서', type: 'archive' },
+      { key: 'B', text: '어떤 사람이 운영하는 곳인지 궁금해서', type: 'story' },
+      { key: 'C', text: '다른 메뉴도 더 보고 싶어서', type: 'visual' },
+      { key: 'D', text: '진행 중이거나 예정된 행사가 궁금해서', type: 'event' },
+    ],
+  },
+  {
+    id: 'P2Q5', stage: '팔로우 동기', question: '카페 계정을 팔로우하고 싶은 가장 큰 이유는?',
+    options: [
+      { key: 'A', text: '운영자와 브랜드 이야기를 계속 보고 싶어서', type: 'story' },
+      { key: 'B', text: '새로운 메뉴 사진을 계속 보고 싶어서', type: 'visual' },
+      { key: 'C', text: '그 카페만의 공간과 분위기를 계속 보고 싶어서', type: 'archive' },
+      { key: 'D', text: '원두·재료·메뉴 정보를 계속 보고 싶어서', type: 'expert' },
+    ],
+  },
+  {
+    id: 'P2Q6', stage: '검색 클릭', question: '검색 결과에서 가장 먼저 눌러보고 싶은 카페는?',
+    options: [
+      { key: 'A', text: '공간 콘셉트가 독특해 보이는 카페', type: 'archive' },
+      { key: 'B', text: '메뉴의 품질과 과정이 믿음직해 보이는 카페', type: 'expert' },
+      { key: 'C', text: '지금만 즐길 수 있는 메뉴나 경험이 있는 카페', type: 'event' },
+      { key: 'D', text: '조용하고 편하게 머물기 좋아 보이는 카페', type: 'slow' },
+    ],
+  },
+  {
+    id: 'P2Q7', stage: '능동적 정보 탐색', question: '카페 정보를 볼 때 굳이 더 자세히 확인하는 것은?',
+    options: [
+      { key: 'A', text: '좌석과 머물기 좋은 환경인지', type: 'slow' },
+      { key: 'B', text: '카페가 만들어진 배경이나 운영자의 이야기', type: 'story' },
+      { key: 'C', text: '한정 메뉴나 행사 일정', type: 'event' },
+      { key: 'D', text: '원두·재료·제조 방식', type: 'expert' },
+    ],
+  },
+  {
+    id: 'P2Q8', stage: '시간·거리 비용을 감수하게 하는 가치', question: '평소보다 조금 멀어도 찾아가고 싶은 카페는?',
+    options: [
+      { key: 'A', text: '지금이 아니면 경험하기 어려운 카페', type: 'event' },
+      { key: 'B', text: '오래 머물며 편하게 쉬기 좋은 카페', type: 'slow' },
+      { key: 'C', text: '공간 콘셉트가 다른 곳과 확실히 다른 카페', type: 'archive' },
+      { key: 'D', text: '카페만의 이야기가 인상적인 카페', type: 'story' },
+    ],
+  },
+  {
+    id: 'P2Q9', stage: '방문 전 기대 가치', question: '처음 방문하는 카페에서 가장 기대하는 것은?',
+    options: [
+      { key: 'A', text: '메뉴의 품질을 직접 확인해 보는 것', type: 'expert' },
+      { key: 'B', text: '편안하게 머무는 시간', type: 'slow' },
+      { key: 'C', text: '그 카페만의 이야기를 느끼는 경험', type: 'story' },
+      { key: 'D', text: '공간을 직접 둘러보는 경험', type: 'archive' },
+    ],
+  },
+  {
+    id: 'P2Q10', stage: '최종 방문 전환', question: '여러 카페 중 오늘 갈 곳을 정하게 만드는 마지막 이유는?',
+    options: [
+      { key: 'A', text: '꼭 먹어보고 싶은 메뉴가 있어서', type: 'visual' },
+      { key: 'B', text: '메뉴의 품질을 믿을 만한 정보가 있어서', type: 'expert' },
+      { key: 'C', text: '오래 머물기 편해 보여서', type: 'slow' },
+      { key: 'D', text: '지금 놓치면 경험하기 어려워서', type: 'event' },
+    ],
+  },
+  {
+    id: 'P2Q11', stage: '현장 최초 주목', question: '카페에 도착했을 때 가장 먼저 눈이 가는 것은?',
+    options: [
+      { key: 'A', text: '한정 메뉴나 이벤트 안내', type: 'event' },
+      { key: 'B', text: '인테리어와 공간의 디테일', type: 'archive' },
+      { key: 'C', text: '편하게 머물 만한 자리', type: 'slow' },
+      { key: 'D', text: '실제로 보이는 메뉴의 모습', type: 'visual' },
+    ],
+  },
+  {
+    id: 'P2Q12', stage: '현장 만족', question: '카페에 머무는 동안 만족도를 가장 크게 좌우하는 것은?',
+    options: [
+      { key: 'A', text: '공간의 디테일과 분위기', type: 'archive' },
+      { key: 'B', text: '메뉴가 주는 맛과 시각적인 즐거움', type: 'visual' },
+      { key: 'C', text: '재료와 제조에서 느껴지는 품질', type: 'expert' },
+      { key: 'D', text: '오래 머물기 편한 환경', type: 'slow' },
+    ],
+  },
+  {
+    id: 'P2Q13', stage: '즉시 방문 자극', question: '오늘 바로 카페에 가고 싶어지는 순간은?',
+    options: [
+      { key: 'A', text: '카페나 운영자의 이야기에 마음이 갔을 때', type: 'story' },
+      { key: 'B', text: '곧 끝나는 팝업이나 한정 소식을 봤을 때', type: 'event' },
+      { key: 'C', text: '조용히 쉬고 싶다는 생각이 들 때', type: 'slow' },
+      { key: 'D', text: '정말 먹어보고 싶은 메뉴를 발견했을 때', type: 'visual' },
+    ],
+  },
+  {
+    id: 'P2Q14', stage: '재방문 동기', question: '한번 방문한 카페를 다시 찾고 싶은 가장 큰 이유는?',
+    options: [
+      { key: 'A', text: '다른 메뉴도 먹어보고 싶어서', type: 'visual' },
+      { key: 'B', text: '메뉴의 품질이 만족스러워서', type: 'expert' },
+      { key: 'C', text: '그 카페와 브랜드가 더 궁금해져서', type: 'story' },
+      { key: 'D', text: '편하게 머물기 좋았어서', type: 'slow' },
+    ],
+  },
+  {
+    id: 'P2Q15', stage: '장기 기억', question: '시간이 지나도 가장 오래 기억에 남는 카페는?',
+    options: [
+      { key: 'A', text: '편안하고 여유롭게 머물렀던 카페', type: 'slow' },
+      { key: 'B', text: '운영자나 브랜드 이야기가 인상적이었던 카페', type: 'story' },
+      { key: 'C', text: '메뉴가 인상적이었던 카페', type: 'visual' },
+      { key: 'D', text: '공간의 취향과 콘셉트가 뚜렷했던 카페', type: 'archive' },
+    ],
+  },
+  {
+    id: 'P2Q16', stage: '공유 동기', question: '친구에게 바로 공유하고 싶은 카페 게시물은?',
+    options: [
+      { key: 'A', text: '지금 참여할 수 있는 한정 메뉴나 행사 소식', type: 'event' },
+      { key: 'B', text: '독특한 공간과 소품이 잘 보이는 게시물', type: 'archive' },
+      { key: 'C', text: '운영자나 카페의 이야기가 담긴 게시물', type: 'story' },
+      { key: 'D', text: '원두·재료·메뉴에 관한 유용한 정보', type: 'expert' },
+    ],
+  },
+  {
+    id: 'P2Q17', stage: '추천 가치', question: '친구에게 카페를 추천할 때 가장 먼저 강조할 것은?',
+    options: [
+      { key: 'A', text: '꼭 먹어봐야 할 메뉴가 있다는 점', type: 'visual' },
+      { key: 'B', text: '편하게 오래 머물기 좋다는 점', type: 'slow' },
+      { key: 'C', text: '메뉴의 품질이 믿음직하다는 점', type: 'expert' },
+      { key: 'D', text: '지금 가야만 즐길 수 있다는 점', type: 'event' },
+    ],
+  },
+  {
+    id: 'P2Q18', stage: '방문 후 자발적 표현', question: '카페 방문 후 후기를 남긴다면 가장 먼저 쓰고 싶은 내용은?',
+    options: [
+      { key: 'A', text: '편하게 머물 수 있었던 점', type: 'slow' },
+      { key: 'B', text: '공간과 분위기가 인상적이었던 점', type: 'archive' },
+      { key: 'C', text: '메뉴가 인상적이었던 점', type: 'visual' },
+      { key: 'D', text: '카페나 운영자의 이야기가 기억에 남았던 점', type: 'story' },
+    ],
+  },
+];
+
+export const COMPARE_PROMPTS = [
+  {
+    id: 'C1', title: '저장하고 싶은 콘텐츠',
+    texts: {
+      slow: '편안한 좌석과 조용한 분위기가 보이는 게시물',
+      visual: '먹음직스러운 메뉴가 크게 보이는 게시물',
+      story: '운영자의 이야기와 브랜드 배경이 담긴 게시물',
+      archive: '독특한 공간과 소품이 드러나는 게시물',
+      expert: '재료와 제조 과정이 구체적으로 보이는 게시물',
+      event: '기간 한정 메뉴나 팝업 소식이 담긴 게시물',
+    },
+  },
+  {
+    id: 'C2', title: '실제로 방문하고 싶은 카페',
+    texts: {
+      slow: '조용히 오래 머물 수 있는 카페',
+      visual: '꼭 먹고 싶은 메뉴가 있는 카페',
+      story: '운영자의 철학이 느껴지는 카페',
+      archive: '콘셉트와 공간 취향이 뚜렷한 카페',
+      expert: '메뉴 품질이 믿음직한 카페',
+      event: '지금만 가능한 경험이 있는 카페',
+    },
+  },
+  {
+    id: 'C3', title: '다시 찾고 싶은 가장 큰 이유',
+    texts: {
+      slow: '편안하게 쉬기 좋아서',
+      visual: '다른 메뉴도 먹어보고 싶어서',
+      story: '운영자와 브랜드를 계속 응원하고 싶어서',
+      archive: '그 공간의 취향이 기억에 남아서',
+      expert: '메뉴 품질이 만족스러워서',
+      event: '새로운 시즌 경험이 기대돼서',
+    },
+  },
+];
+
+export const FINAL_TIE_PROMPT = {
+  id: 'CTIE',
+  title: '오늘 딱 하나만 고른다면?',
+  texts: COMPARE_PROMPTS[1].texts,
+};
