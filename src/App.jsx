@@ -67,8 +67,6 @@ function Screen({ className = '', children }) {
   return (
     <main className={`screen ${className}`}>
       <div className="grid-bg" aria-hidden="true" />
-      <div className="pink-rail pink-rail-left" aria-hidden="true" />
-      <div className="pink-rail pink-rail-right" aria-hidden="true" />
       <div className="design-canvas">{children}</div>
     </main>
   );
@@ -77,9 +75,12 @@ function Screen({ className = '', children }) {
 function Start({ onNext }) {
   return (
     <Screen className="start-screen">
-      <section className="start-copy">
+      <section className="start-copy" aria-label="카페 취향 MBTI">
         <div className="eyebrow">나는 어떤 카페를 좋아할까?</div>
-        <h1><span>카페 취향</span><span>MBTI</span></h1>
+        <div className="start-title" aria-hidden="true">
+          <span className="start-title-korean">카페 취향</span>
+          <img className="start-title-mbti" src="/mbti-wordmark.svg" alt="" />
+        </div>
       </section>
       <button className="start-btn" onClick={onNext}>시작하기</button>
       <Logo />
