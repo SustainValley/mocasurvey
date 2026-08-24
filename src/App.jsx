@@ -14,7 +14,41 @@ const TYPE_COLORS = {
   slow: '#BBA2D5',
 };
 
-const SESSION_KEY = 'moca-survey-session-v3';
+
+const STEP3_POSTS = [
+  // Step 3 content stimuli sourced from FigJam: "카페 콘텐츠 유형별 사진 수집".
+  // V labels are internal research keys only and are never rendered to participants.
+  { id: 'P3-01', group: 'V1', image: 'https://www.figma.com/api/mcp/asset/0700e658-b977-48f1-89b3-202de459933e.png', fallback: '/step3/post-01.jpg', alt: '카페 추천 게시물 1' },
+  { id: 'P3-02', group: 'V1', image: 'https://www.figma.com/api/mcp/asset/65fac3d4-c8f8-4033-8384-356bbea2ce9c.png', fallback: '/step3/post-02.jpg', alt: '카페 추천 게시물 2' },
+  { id: 'P3-03', group: 'V1', image: 'https://www.figma.com/api/mcp/asset/c9e278e7-b1a2-4042-8b78-7dfe07ee33b3.png', fallback: '/step3/post-03.jpg', alt: '카페 추천 게시물 3' },
+  { id: 'P3-04', group: 'V2', image: 'https://www.figma.com/api/mcp/asset/83d64078-1dfb-45d8-b398-373e42d1c614.png', fallback: '/step3/post-04.jpg', alt: '카페 추천 게시물 4' },
+  { id: 'P3-05', group: 'V2', image: 'https://www.figma.com/api/mcp/asset/d405ddc9-9304-4285-9a2b-68d147b1f12b.png', fallback: '/step3/post-05.jpg', alt: '카페 추천 게시물 5' },
+  { id: 'P3-06', group: 'V2', image: 'https://www.figma.com/api/mcp/asset/9104fe10-9b96-463e-a746-238bcbbcbb68.png', fallback: '/step3/post-06.jpg', alt: '카페 추천 게시물 6' },
+  { id: 'P3-07', group: 'V3', image: 'https://www.figma.com/api/mcp/asset/205f2ed7-92b4-4198-81d1-0416fd8f5262.png', fallback: '/step3/post-07.jpg', alt: '카페 추천 게시물 7' },
+  { id: 'P3-08', group: 'V3', image: 'https://www.figma.com/api/mcp/asset/1ea66a8f-cf98-4127-ba95-d329c28f7aea.png', fallback: '/step3/post-08.jpg', alt: '카페 추천 게시물 8' },
+  { id: 'P3-09', group: 'V3', image: 'https://www.figma.com/api/mcp/asset/23c8c627-549f-4bd9-bf86-7038a4370024.png', fallback: '/step3/post-09.jpg', alt: '카페 추천 게시물 9' },
+  { id: 'P3-10', group: 'V4', image: 'https://www.figma.com/api/mcp/asset/b0a424d3-adc9-4cd2-b24c-381cfe2d8787.png', fallback: '/step3/post-10.jpg', alt: '카페 추천 게시물 10' },
+  { id: 'P3-11', group: 'V4', image: 'https://www.figma.com/api/mcp/asset/a0be566c-308c-448e-98c8-eeaa5eddec35.png', fallback: '/step3/post-11.jpg', alt: '카페 추천 게시물 11' },
+  { id: 'P3-12', group: 'V4', image: 'https://www.figma.com/api/mcp/asset/32ee4b3d-d7e8-4b9c-814f-a5ac05710555.png', fallback: '/step3/post-12.jpg', alt: '카페 추천 게시물 12' },
+  { id: 'P3-13', group: 'V5', image: 'https://www.figma.com/api/mcp/asset/36da938d-e32f-40f5-a749-7588d4a0fb2f.png', fallback: '/step3/post-13.jpg', alt: '카페 추천 게시물 13' },
+  { id: 'P3-14', group: 'V5', image: 'https://www.figma.com/api/mcp/asset/ec11462a-6709-4d21-a077-1bc03ff3bb0d.png', fallback: '/step3/post-14.jpg', alt: '카페 추천 게시물 14' },
+  { id: 'P3-15', group: 'V5', image: 'https://www.figma.com/api/mcp/asset/b2e9832c-9fd8-40c6-9f15-f7a75ad2b628.png', fallback: '/step3/post-15.jpg', alt: '카페 추천 게시물 15' },
+  { id: 'P3-16', group: 'V6', image: 'https://www.figma.com/api/mcp/asset/61723ac0-d94c-4c18-a7aa-483889681c79.png', fallback: '/step3/post-16.jpg', alt: '카페 추천 게시물 16' },
+  { id: 'P3-17', group: 'V6', image: 'https://www.figma.com/api/mcp/asset/c010c5bb-14cc-4427-a023-0ea3e9c7a539.png', fallback: '/step3/post-17.jpg', alt: '카페 추천 게시물 17' },
+  { id: 'P3-18', group: 'V6', image: 'https://www.figma.com/api/mcp/asset/a991105c-dcd4-4dc8-9bad-495b46d7e4de.png', fallback: '/step3/post-18.jpg', alt: '카페 추천 게시물 18' },
+];
+
+const STEP3_STRUCTURE_GROUPS = [
+  { id: 'V1', postIds: ['P3-01', 'P3-02', 'P3-03'] },
+  { id: 'V2', postIds: ['P3-04', 'P3-05', 'P3-06'] },
+  { id: 'V3', postIds: ['P3-07', 'P3-08', 'P3-09'] },
+];
+
+function getStep3Post(postId) {
+  return STEP3_POSTS.find((post) => post.id === postId);
+}
+
+const SESSION_KEY = 'moca-survey-session-v4';
 const AUTH_KEY = 'moca-survey-auth-v1';
 const COMPLETED_KEY = 'moca-survey-completed-v1';
 
@@ -204,7 +238,7 @@ function CompareScreen({ mode, types, index, value, onSelect, onBack, isFinalTie
   const total = isFinalTie ? 1 : 3;
   return (
     <Screen className="survey-screen compare-screen">
-      <SurveyHeader step="03" title="취향 마무리" current={isFinalTie ? 1 : index + 1} total={total} progress={((isFinalTie ? 1 : index + 1) / total) * 100} />
+      <SurveyHeader step="02" title="취향 추가 질문" current={isFinalTie ? 1 : index + 1} total={total} progress={((isFinalTie ? 1 : index + 1) / total) * 100} />
       <section className="survey-question-block compare-question-block">
         <h2>{prompt.title}</h2>
         <div className="survey-options compare-options">
@@ -213,6 +247,195 @@ function CompareScreen({ mode, types, index, value, onSelect, onBack, isFinalTie
           ))}
         </div>
         {onBack && <button type="button" className="survey-prev" onClick={onBack}>← 이전</button>}
+      </section>
+      <Logo />
+    </Screen>
+  );
+}
+
+
+function InstagramChrome({ children, footer, className = '', onBack }) {
+  return (
+    <main className={`instagram-step3 ${className}`}>
+      <header className="instagram-search-head">
+        <button type="button" className="instagram-back" aria-label="뒤로가기" onClick={onBack} disabled={!onBack}><span /></button>
+        <div className="instagram-search-box" aria-label="검색어 카페 추천">
+          <span className="instagram-search-icon" aria-hidden="true" />
+          <span>카페 추천</span>
+        </div>
+      </header>
+      <nav className="instagram-tabs" aria-label="인스타그램 검색 탭">
+        <span className="is-active">추천</span><span>프로필</span><span>오디오</span><span>태그</span>
+      </nav>
+      <div className="instagram-tab-rule"><i /></div>
+      {children}
+      {footer}
+    </main>
+  );
+}
+
+function Step3Loading({ onDone }) {
+  useEffect(() => {
+    const timer = window.setTimeout(onDone, 3100);
+    return () => window.clearTimeout(timer);
+  }, [onDone]);
+  return (
+    <Screen className="step3-loading-screen">
+      <section className="step3-loading-head">
+        <p>MOCA SURVEY</p>
+        <div><strong>03</strong><span>실제 게시물 취향 확인</span><em>CONNECTING</em></div>
+        <i><b /></i>
+      </section>
+      <section className="step3-loading-copy">
+        <p>CAFE FEED · STEP 03</p>
+        <h2>이제 실제 게시물을 보며<br />취향을 한 번 더 확인해요.</h2>
+        <span>잠시 후 인스타그램처럼 카페 추천 피드가 열려요.<br />먼저 마음에 드는 게시물 3개를 <b>끌리는 순서대로</b> 골라주세요.<br />그다음에는 비슷한 게시물 3장 중 <b>가장 마음에 드는 1장</b>을 선택해요.</span>
+      </section>
+      <div className="step3-loading-module" aria-hidden="true">
+        <div className="loading-window"><i /><i /><i /><i /></div>
+        <div className="loading-track"><i /></div>
+        <p><b>CAFE FEED</b><span>게시물 취향 확인 준비 중</span></p>
+      </div>
+      <Logo />
+    </Screen>
+  );
+}
+
+function Step3Rank({ rankings, onChange, onNext, onBack }) {
+  const toggle = (postId) => {
+    const selectedIndex = rankings.indexOf(postId);
+    if (selectedIndex >= 0) {
+      onChange(rankings.filter((id) => id !== postId));
+      return;
+    }
+    if (rankings.length >= 3) return;
+    onChange([...rankings, postId]);
+  };
+  return (
+    <InstagramChrome
+      className="step3-rank-screen"
+      onBack={onBack}
+      footer={
+        <div className="instagram-task-toast">
+          <div><strong>{rankings.length}/3</strong><span>{rankings.length < 3 ? '마음에 드는 게시물을 순서대로 눌러주세요.' : 'TOP 3 선택이 완료됐어요.'}</span></div>
+          <button type="button" disabled={rankings.length !== 3} onClick={onNext}>다음</button>
+        </div>
+      }
+    >
+      <section className="instagram-explore-grid" aria-label="카페 추천 게시물 선택">
+        {STEP3_POSTS.map((post) => {
+          const rankIndex = rankings.indexOf(post.id);
+          return (
+            <button key={post.id} type="button" className={`instagram-post-card ${rankIndex >= 0 ? 'is-ranked' : ''}`} onClick={() => toggle(post.id)} aria-label={`${post.alt}${rankIndex >= 0 ? `, ${rankIndex + 1}순위` : ''}`}>
+              <img src={post.image} alt={post.alt} onError={(event) => { if (post.fallback && event.currentTarget.src !== `${window.location.origin}${post.fallback}`) event.currentTarget.src = post.fallback; }} />
+              {rankIndex >= 0 && <span className="instagram-rank-badge">{rankIndex + 1}</span>}
+            </button>
+          );
+        })}
+      </section>
+    </InstagramChrome>
+  );
+}
+
+function Step3TaskModal({ rankings, onStart, onBack }) {
+  const visiblePosts = rankings.map(getStep3Post).filter(Boolean);
+  return (
+    <InstagramChrome className="step3-modal-screen" onBack={onBack}>
+      <section className="instagram-explore-grid is-dimmed" aria-hidden="true">
+        {[...visiblePosts, ...STEP3_POSTS].slice(0, 10).map((post, index) => (
+          <div key={`${post.id}-${index}`} className="instagram-post-card"><img src={post.image} alt="" onError={(event) => { if (post.fallback) event.currentTarget.src = post.fallback; }} /></div>
+        ))}
+      </section>
+      <div className="step3-modal-dim" />
+      <section className="step3-task-modal" role="dialog" aria-modal="true" aria-labelledby="step3-modal-title">
+        <i />
+        <p>STEP 03 · 2 / 2</p>
+        <h2 id="step3-modal-title">이번에는 하나만<br />골라주세요.</h2>
+        <span>앞에서는 마음에 드는 게시물 3개를 순서대로 골랐어요.<br />이제는 비슷한 주제의 게시물 3개 중<br />가장 마음에 드는 1개만 선택해 주세요.</span>
+        <button type="button" onClick={onStart}>비교 시작하기</button>
+      </section>
+    </InstagramChrome>
+  );
+}
+
+function Step3Compare({ index, choices, onSelect, onBack }) {
+  const group = STEP3_STRUCTURE_GROUPS[index];
+  const posts = group.postIds.map(getStep3Post).filter(Boolean);
+  const selectedId = choices[group.id] || '';
+  return (
+    <InstagramChrome
+      className="step3-compare-screen"
+      onBack={onBack}
+      footer={
+        <div className="instagram-task-toast compare-toast">
+          <div><strong>{index + 1}/3</strong><span>이 3개 중 가장 마음에 드는 게시물 하나를 골라주세요.</span></div>
+          <button type="button" disabled={!selectedId} onClick={() => onSelect(group.id, selectedId, true)}>다음 ›</button>
+        </div>
+      }
+    >
+      <section className="instagram-compare-grid" aria-label="게시물 3개 중 하나 선택">
+        {posts.map((post) => (
+          <button
+            key={post.id}
+            type="button"
+            className={`instagram-compare-card ${selectedId === post.id ? 'is-selected' : ''}`}
+            onClick={() => onSelect(group.id, post.id, false)}
+            aria-pressed={selectedId === post.id}
+          >
+            <img src={post.image} alt={post.alt} onError={(event) => { if (post.fallback && event.currentTarget.src !== `${window.location.origin}${post.fallback}`) event.currentTarget.src = post.fallback; }} />
+            <span className="instagram-media-stack" aria-hidden="true"><i /><i /></span>
+            {selectedId === post.id && <span className="instagram-check-badge">✓</span>}
+          </button>
+        ))}
+      </section>
+    </InstagramChrome>
+  );
+}
+
+function ResultLoading({ onDone }) {
+  const [analysisProgress, setAnalysisProgress] = useState(0);
+
+  useEffect(() => {
+    const startedAt = performance.now();
+    const duration = 3000;
+    let frameId;
+    const tick = (now) => {
+      const elapsed = now - startedAt;
+      const linear = Math.min(1, elapsed / duration);
+      const eased = 1 - Math.pow(1 - linear, 2.2);
+      const next = Math.min(100, Math.round(eased * 100));
+      setAnalysisProgress(next);
+      if (linear < 1) frameId = window.requestAnimationFrame(tick);
+    };
+    frameId = window.requestAnimationFrame(tick);
+    const timer = window.setTimeout(onDone, duration + 350);
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.clearTimeout(timer);
+    };
+  }, [onDone]);
+
+  const phase1Done = analysisProgress >= 28;
+  const phase2Done = analysisProgress >= 62;
+  const phase3Done = analysisProgress >= 100;
+
+  return (
+    <Screen className="result-loading-screen">
+      <div className="result-loading-instagram" aria-hidden="true">
+        <div className="result-loading-search"><i /><span /></div>
+        <div className="result-loading-tabs"><i /><i /><i /><i /></div>
+        <div className="result-loading-tiles"><i /><i /><i /><i /></div>
+      </div>
+      <section className="result-loading-copy">
+        <p>CAFE FEED → MOCA TYPE</p><em>{phase3Done ? 'READY' : 'ANALYZING'}</em>
+        <h2>선택을 모아<br />취향을 정리하고 있어요.</h2>
+        <span>방금 고른 게시물과 앞선 설문 응답을 함께 연결하고 있어요.<br />0%부터 차근차근 분석한 뒤 결과를 보여드릴게요.</span>
+        <div className="result-analysis-card">
+          <p><b>01</b><span>TOP 3 선택 순서</span><em className={phase1Done ? '' : 'is-pink'}>{phase1Done ? '완료' : '분석 중'}</em></p>
+          <p><b>02</b><span>메뉴 · 제조 · 공간 구조</span><em className={phase2Done ? '' : phase1Done ? 'is-pink' : ''}>{phase2Done ? '완료' : phase1Done ? '분석 중' : '대기'}</em></p>
+          <p><b>03</b><span>Step 1 · 2 응답 연결</span><em className={phase3Done ? '' : phase2Done ? 'is-pink' : ''}>{phase3Done ? '완료' : phase2Done ? '분석 중' : '대기'}</em></p>
+          <i><b style={{ width: `${analysisProgress}%` }} /></i><strong>{analysisProgress}%</strong>
+        </div>
       </section>
       <Logo />
     </Screen>
@@ -580,6 +803,9 @@ export default function App() {
   const [compareIndex, setCompareIndex] = useState(initialSession?.compareIndex || 0);
   const [compareAnswers, setCompareAnswers] = useState(initialSession?.compareAnswers || []);
   const [finalTieAnswer, setFinalTieAnswer] = useState(initialSession?.finalTieAnswer || '');
+  const [step3Rankings, setStep3Rankings] = useState(initialSession?.step3Rankings || []);
+  const [step3CompareIndex, setStep3CompareIndex] = useState(initialSession?.step3CompareIndex || 0);
+  const [step3StructureChoices, setStep3StructureChoices] = useState(initialSession?.step3StructureChoices || {});
   const [result, setResult] = useState(initialSession?.result || initialState.completed?.result || null);
   const [existingRecord, setExistingRecord] = useState(initialSession?.existingRecord || initialState.completed || null);
   const [serverError, setServerError] = useState('');
@@ -592,22 +818,24 @@ export default function App() {
     const safePage = page === 'upload' && isReading ? 'upload' : page;
     writeJson(SESSION_KEY, {
       page: safePage, ocrData, verifiedUser, part1Index, part2Index, part1Answers, part2Answers,
-      comparison, compareIndex, compareAnswers, finalTieAnswer, result, existingRecord,
+      comparison, compareIndex, compareAnswers, finalTieAnswer, step3Rankings, step3CompareIndex, step3StructureChoices, result, existingRecord,
     });
-  }, [page, ocrData, verifiedUser, part1Index, part2Index, part1Answers, part2Answers, comparison, compareIndex, compareAnswers, finalTieAnswer, result, existingRecord, isReading]);
+  }, [page, ocrData, verifiedUser, part1Index, part2Index, part1Answers, part2Answers, comparison, compareIndex, compareAnswers, finalTieAnswer, step3Rankings, step3CompareIndex, step3StructureChoices, result, existingRecord, isReading]);
 
   useEffect(() => {
     if (verifiedUser?.studentId) saveAuth(verifiedUser);
   }, [verifiedUser]);
 
   useEffect(() => {
-    if (!result || !verifiedUser?.studentId) return;
+    if (page !== 'result' || !result || !verifiedUser?.studentId) return;
     const prior = getCompletedRecord(verifiedUser.studentId);
     const record = {
       verifiedUser,
       result,
       part1Answers,
       part2Answers,
+      step3Rankings,
+      step3StructureChoices,
       scores,
       completedAt: prior?.completedAt || new Date().toISOString(),
     };
@@ -618,7 +846,7 @@ export default function App() {
     if (completedSyncRef.current === syncKey) return;
     completedSyncRef.current = syncKey;
     let cancelled = false;
-    completeStudentSurvey({ verifiedUser, result, part1Answers, part2Answers, scores })
+    completeStudentSurvey({ verifiedUser, result, part1Answers, part2Answers, step3Rankings, step3StructureChoices, scores })
       .then((serverRecord) => {
         if (cancelled || !serverRecord || serverRecord.mode === 'local') return;
         if (serverRecord.status === 'already_completed' && serverRecord.result) {
@@ -638,7 +866,7 @@ export default function App() {
         if (!cancelled) setServerError('설문 결과 서버 저장에 실패했어요. 인터넷 연결 후 새로고침하면 다시 시도합니다.');
       });
     return () => { cancelled = true; };
-  }, [result, verifiedUser, part1Answers, part2Answers, scores]);
+  }, [page, result, verifiedUser, part1Answers, part2Answers, step3Rankings, step3StructureChoices, scores]);
 
   useEffect(() => {
     if (!verifiedUser?.studentId || !['part1','part2','compare','finalTie'].includes(page)) return;
@@ -734,6 +962,15 @@ export default function App() {
     });
   };
 
+  const beginStep3 = (finalResult) => {
+    setResult(finalResult);
+    setStep3Rankings([]);
+    setStep3CompareIndex(0);
+    setStep3StructureChoices({});
+    setPage('step3Loading');
+    window.scrollTo({ top: 0 });
+  };
+
   const selectPart2 = (option, optionIndex) => {
     const now = Date.now();
     setPart2Answers((prev) => {
@@ -762,8 +999,7 @@ export default function App() {
       const finalScores = calculateScores(answersWithCurrent);
       const decision = decideAfterBase(finalScores);
       if (decision.mode === 'done') {
-        setResult({ primaryType: decision.primaryType, secondaryType: decision.secondaryType, usedComparison: false });
-        setPage('result');
+        beginStep3({ primaryType: decision.primaryType, secondaryType: decision.secondaryType, usedComparison: false });
       } else {
         setComparison(decision); setCompareAnswers(Array(3).fill('')); setCompareIndex(0); setFinalTieAnswer(''); setPage('compare'); setQuestionStartedAt(Date.now());
       }
@@ -776,7 +1012,7 @@ export default function App() {
       if (compareIndex < 2) { setCompareIndex((i) => i + 1); setQuestionStartedAt(Date.now()); return; }
       const decision = decideFromComparison(comparison.mode, comparison.candidates, nextAnswers, scores);
       if (decision.done) {
-        setResult({ primaryType: decision.primaryType, secondaryType: decision.secondaryType, usedComparison: true, comparisonMode: comparison.mode }); setPage('result');
+        beginStep3({ primaryType: decision.primaryType, secondaryType: decision.secondaryType, usedComparison: true, comparisonMode: comparison.mode });
       } else {
         setComparison((prev) => ({ ...prev, tieCandidates: decision.tieCandidates, votes: decision.votes })); setPage('finalTie');
       }
@@ -789,8 +1025,21 @@ export default function App() {
       const secondaryType = [...comparison.candidates]
         .filter((candidate) => candidate !== type)
         .sort((a, b) => (comparison.votes?.[b] || 0) - (comparison.votes?.[a] || 0) || scores[b] - scores[a] || TYPE_ORDER.indexOf(a) - TYPE_ORDER.indexOf(b))[0];
-      setResult({ primaryType: type, secondaryType, usedComparison: true, comparisonMode: 'triple+final' }); setPage('result');
+      beginStep3({ primaryType: type, secondaryType, usedComparison: true, comparisonMode: 'triple+final' });
     });
+  };
+
+  const chooseStep3Structure = (groupId, postId, advance = true) => {
+    const next = { ...step3StructureChoices, [groupId]: postId };
+    setStep3StructureChoices(next);
+    if (!advance) return;
+    if (step3CompareIndex < STEP3_STRUCTURE_GROUPS.length - 1) {
+      setStep3CompareIndex((i) => i + 1);
+      window.scrollTo({ top: 0 });
+    } else {
+      setPage('resultLoading');
+      window.scrollTo({ top: 0 });
+    }
   };
 
   const reset = () => {
@@ -800,6 +1049,7 @@ export default function App() {
     setPart1Answers(prior?.part1Answers || Array(PART1_QUESTIONS.length).fill(null));
     setPart2Answers(prior?.part2Answers || Array(PART2_QUESTIONS.length).fill(null));
     setComparison(null); setCompareIndex(0); setCompareAnswers([]); setFinalTieAnswer('');
+    setStep3Rankings([]); setStep3CompareIndex(0); setStep3StructureChoices({});
     if (prior?.result) {
       setExistingRecord(prior); setResult(prior.result); setPage('already');
     } else if (verifiedUser) {
@@ -828,6 +1078,11 @@ export default function App() {
       {page === 'part2' && <SurveyQuestionScreen part={2} index={part2Index} answer={part2Answers[part2Index]} onSelect={selectPart2} onBack={() => { if (part2Index > 0) setPart2Index((i) => i - 1); else { setPage('part1'); setPart1Index(PART1_QUESTIONS.length - 1); } setQuestionStartedAt(Date.now()); }} />}
       {page === 'compare' && comparison && <CompareScreen mode={comparison.mode} types={comparison.candidates} index={compareIndex} value={compareAnswers[compareIndex]} onSelect={selectCompare} onBack={() => { if (compareIndex > 0) setCompareIndex((i) => i - 1); else { setPage('part2'); setPart2Index(PART2_QUESTIONS.length - 1); } setQuestionStartedAt(Date.now()); }} />}
       {page === 'finalTie' && comparison?.tieCandidates && <CompareScreen mode="triple" types={comparison.tieCandidates} index={0} value={finalTieAnswer} onSelect={selectFinalTie} onBack={() => { setPage('compare'); setCompareIndex(2); }} isFinalTie />}
+      {page === 'step3Loading' && <Step3Loading onDone={() => { setPage('step3Rank'); window.scrollTo({ top: 0 }); }} />}
+      {page === 'step3Rank' && <Step3Rank rankings={step3Rankings} onChange={setStep3Rankings} onBack={() => { setPage(comparison ? 'compare' : 'part2'); if (!comparison) setPart2Index(PART2_QUESTIONS.length - 1); window.scrollTo({ top: 0 }); }} onNext={() => { setPage('step3Modal'); window.scrollTo({ top: 0 }); }} />}
+      {page === 'step3Modal' && <Step3TaskModal rankings={step3Rankings} onBack={() => { setPage('step3Rank'); window.scrollTo({ top: 0 }); }} onStart={() => { setStep3CompareIndex(0); setPage('step3Compare'); window.scrollTo({ top: 0 }); }} />}
+      {page === 'step3Compare' && <Step3Compare index={step3CompareIndex} choices={step3StructureChoices} onSelect={chooseStep3Structure} onBack={() => { if (step3CompareIndex > 0) setStep3CompareIndex((i) => i - 1); else setPage('step3Modal'); window.scrollTo({ top: 0 }); }} />}
+      {page === 'resultLoading' && <ResultLoading onDone={() => { setPage('result'); window.scrollTo({ top: 0 }); }} />}
       {page === 'result' && result && <ResultScreen result={result} scores={scores} onRestart={reset} onOfflineGuide={() => { setPage('offlineGuide'); window.scrollTo({ top: 0 }); }} />}
       {page === 'offlineGuide' && <OfflineGuide onBack={() => { setPage(result ? 'result' : existingRecord ? 'already' : 'start'); window.scrollTo({ top: 0 }); }} />}
       {page === 'already' && existingRecord && <AlreadyParticipated record={existingRecord} onViewResult={openStoredResult} onOfflineGuide={() => { setPage('offlineGuide'); window.scrollTo({ top: 0 }); }} />}

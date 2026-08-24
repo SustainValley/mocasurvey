@@ -322,3 +322,81 @@ button{cursor:pointer}
   outline:2px solid #212426;
   outline-offset:2px;
 }
+
+/* Step 3 — Instagram-inspired content preference flow */
+.instagram-step3{position:relative;width:min(375px,100%);min-height:100dvh;margin:0 auto;background:#fff;color:#111;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Kim Jung Chul Gothic',sans-serif}
+.instagram-search-head{position:sticky;top:0;z-index:20;height:62px;background:#fff;display:flex;align-items:center;padding:8px 16px 7px;gap:10px}
+.instagram-back{position:relative;width:42px;height:42px;flex:0 0 42px;border:1px solid #efefef;border-radius:50%;background:#fff;padding:0;box-shadow:0 2px 7px rgba(0,0,0,.045)}
+.instagram-back span{position:absolute;left:17px;top:12px;width:11px;height:18px}
+.instagram-back span::before,.instagram-back span::after{content:'';position:absolute;left:1px;width:2px;height:12px;border-radius:2px;background:#262626}
+.instagram-back span::before{top:0;transform:rotate(43deg);transform-origin:bottom center}
+.instagram-back span::after{bottom:0;transform:rotate(-43deg);transform-origin:top center}
+.instagram-search-box{height:42px;flex:1;border-radius:12px;background:#f1f2f5;display:flex;align-items:center;padding:0 14px;color:#262626;font-size:16px;font-weight:400;letter-spacing:-.15px}
+.instagram-search-icon{position:relative;width:15px;height:15px;margin-right:9px;border:2px solid #7b8490;border-radius:50%;flex:none}
+.instagram-search-icon::after{content:'';position:absolute;width:6px;height:2px;border-radius:2px;background:#7b8490;right:-5px;bottom:-2px;transform:rotate(45deg)}
+.instagram-tabs{position:sticky;top:62px;z-index:19;height:52px;background:#fff;display:grid;grid-template-columns:repeat(4,1fr);align-items:center;color:#7a7d82;font-size:14px;font-weight:500}
+.instagram-tabs span{text-align:center;line-height:52px}
+.instagram-tabs .is-active{color:#111;font-weight:700}
+.instagram-tab-rule{position:sticky;top:114px;z-index:19;height:1px;background:#e8e8e8}
+.instagram-tab-rule i{position:absolute;left:34px;top:-3px;width:27px;height:2px;background:#111;border-radius:2px}
+.instagram-explore-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#fff;padding-bottom:92px}
+.instagram-post-card{position:relative;display:block;width:100%;aspect-ratio:0.755;border:0;padding:0;background:#ececec;overflow:hidden}
+.instagram-post-card img{width:100%;height:100%;display:block;object-fit:cover}
+.instagram-post-card.is-ranked::after{content:'';position:absolute;inset:0;border:2px solid #0095f6;pointer-events:none}
+.instagram-rank-badge,.instagram-check-badge{position:absolute;right:8px;top:8px;width:27px;height:27px;border-radius:50%;background:#0095f6;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;line-height:1;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.instagram-task-toast{position:fixed;z-index:30;left:50%;bottom:18px;transform:translateX(-50%);width:min(343px,calc(100vw - 32px));min-height:61px;border-radius:13px;background:#050505;color:#fff;display:flex;align-items:center;padding:10px 12px 10px 15px;box-shadow:0 8px 22px rgba(0,0,0,.18)}
+.instagram-task-toast>div{display:grid;grid-template-columns:34px 1fr;gap:4px 8px;align-items:start;min-width:0;flex:1}.instagram-task-toast strong{grid-row:1/3;font-size:12px;line-height:18px}.instagram-task-toast span{font-size:11px;line-height:15px;color:#f4f4f4}.instagram-task-toast button{border:0;background:transparent;color:#fff;font-size:13px;font-weight:700;padding:10px 5px 10px 14px;white-space:nowrap}.instagram-task-toast button:disabled{opacity:.35;cursor:default}
+
+.step3-loading-screen .grid-bg,.result-loading-screen .grid-bg{background-color:#fff;background-image:linear-gradient(to right,#e0ebf0 1px,transparent 1px),linear-gradient(to bottom,#e0ebf0 1px,transparent 1px);background-size:40px 40px;background-position:27px 19px}
+.step3-loading-head{position:absolute;left:16px;top:82px;width:343px;height:62px}.step3-loading-head>p{margin:0;font-size:10px;line-height:12px;color:#6d7277;font-weight:700}.step3-loading-head>div{margin-top:7px;display:flex;align-items:baseline}.step3-loading-head strong{font-size:22px}.step3-loading-head span{margin-left:10px;font-size:12px;font-weight:700}.step3-loading-head em{margin-left:auto;font-size:10px;font-style:normal;color:#6d7277;font-weight:700}.step3-loading-head>i{position:absolute;left:0;bottom:0;width:343px;height:2px;background:#d7dddf}.step3-loading-head>i b{display:block;width:56%;height:2px;background:#ffabc9;animation:mocaConnect 3.1s cubic-bezier(.2,.7,.2,1) forwards}@keyframes mocaConnect{0%{width:0%}100%{width:100%}}
+.step3-loading-copy{position:absolute;left:16px;top:210px;width:343px}.step3-loading-copy p{margin:0 0 13px;color:#7b7f83;font-size:10px;font-weight:700}.step3-loading-copy h2{margin:0;font-size:34px;line-height:1.12;letter-spacing:-1.3px}.step3-loading-copy span{display:block;margin-top:15px;color:#666b70;font-size:12px;line-height:17px}
+.step3-loading-module{position:absolute;left:16px;top:425px;width:343px;height:182px;border:1px solid #252729;background:rgba(255,255,255,.92);padding:18px}.loading-window{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;height:88px}.loading-window i{display:block;background:linear-gradient(145deg,#f8dce9,#edf3f5)}.loading-window i:nth-child(2){background:linear-gradient(145deg,#e8f3f0,#cbded8)}.loading-window i:nth-child(3){background:linear-gradient(145deg,#f5f1cf,#e5c99e)}.loading-window i:nth-child(4){background:linear-gradient(145deg,#e3d8ee,#c9bdd9)}.loading-track{margin-top:18px;height:3px;background:#e2e4e6}.loading-track i{display:block;height:3px;background:#252729;animation:mocaModuleLoad 3.1s cubic-bezier(.2,.7,.2,1) forwards}@keyframes mocaModuleLoad{from{width:0%}to{width:100%}}.step3-loading-module>p{display:flex;justify-content:space-between;margin:12px 0 0;font-size:9px;color:#666b70}.step3-loading-module>p b{color:#252729}
+
+.step3-modal-screen{height:100dvh;overflow:hidden}.step3-modal-screen .instagram-explore-grid{filter:saturate(.75)}.step3-modal-dim{position:absolute;z-index:40;inset:0;background:rgba(0,0,0,.48);backdrop-filter:blur(1px)}.step3-task-modal{position:absolute;z-index:41;left:16px;right:16px;bottom:68px;border-radius:22px;background:#fff;padding:25px 20px 20px;box-shadow:0 18px 55px rgba(0,0,0,.28)}.step3-task-modal>i{display:block;width:42px;height:3px;background:#ffabc9;margin-bottom:16px}.step3-task-modal>p{margin:0;color:#72767b;font-size:10px;line-height:13px;font-weight:700}.step3-task-modal h2{margin:18px 0 13px;font-family:'Kim Jung Chul Gothic',sans-serif;font-size:30px;line-height:1.05;letter-spacing:-1.1px}.step3-task-modal>span{display:block;color:#676c71;font-family:'Kim Jung Chul Gothic',sans-serif;font-size:11px;line-height:16px}.step3-task-modal button{width:100%;height:50px;margin-top:24px;border:0;border-radius:11px;background:#151515;color:#fff;font-size:13px;font-weight:700}
+
+.compare-stage-head{height:54px;padding:0 16px;display:flex;align-items:center;border-bottom:1px solid #eee;background:#fff}.compare-stage-head button{width:30px;border:0;background:transparent;padding:0;text-align:left;font-size:17px}.compare-stage-head span{font-size:13px;font-weight:700}.compare-stage-head em{margin-left:auto;font-style:normal;font-size:10px;color:#777;font-weight:700}.instagram-compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:18px 0 0;background:#fff}.instagram-compare-card{position:relative;height:346px;border:0;padding:0;background:#eee;overflow:hidden}.instagram-compare-card img{width:100%;height:100%;object-fit:cover;display:block}.instagram-compare-card.is-selected::after{content:'';position:absolute;inset:0;border:3px solid #0095f6}.instagram-compare-card .instagram-check-badge{right:7px;top:7px}.compare-helper{margin:18px 16px 0;color:#777;font-size:11px;line-height:15px;text-align:center}.compare-toast>div{grid-template-columns:32px 1fr}
+
+.result-loading-instagram{position:absolute;left:0;top:0;width:375px;height:300px;background:#fff;opacity:.2;filter:blur(.25px);mask-image:linear-gradient(to bottom,#000 35%,transparent 100%)}.result-loading-search{position:absolute;left:16px;top:20px;width:343px;height:42px;border-radius:12px;background:#e6e7e9}.result-loading-search i{position:absolute;left:18px;top:13px;width:14px;height:14px;border:2px solid #999;border-radius:50%}.result-loading-search span{position:absolute;left:48px;top:16px;width:72px;height:8px;background:#b8bbbe}.result-loading-tabs{position:absolute;top:82px;left:16px;right:16px;display:flex;justify-content:space-between}.result-loading-tabs i{width:46px;height:8px;background:#c8cbcd}.result-loading-tiles{position:absolute;left:0;top:118px;right:0;display:grid;grid-template-columns:repeat(2,1fr);gap:1px}.result-loading-tiles i{height:164px;background:linear-gradient(145deg,#e8e8e8,#f7f7f7)}
+.result-loading-copy{position:absolute;left:16px;top:338px;width:343px}.result-loading-copy>p{margin:0;color:#6d7277;font-size:10px;font-weight:700}.result-loading-copy>em{position:absolute;right:0;top:0;font-size:10px;font-style:normal;color:#6d7277;font-weight:700}.result-loading-copy h2{margin:20px 0 11px;font-size:32px;line-height:1.1;letter-spacing:-1.2px}.result-loading-copy>span{display:block;color:#666b70;font-size:11px;line-height:16px}.result-analysis-card{position:relative;margin-top:34px;border:1px solid #252729;background:#fff;padding:18px 13px 30px}.result-analysis-card p{display:grid;grid-template-columns:26px 1fr auto;gap:7px;margin:0 0 14px;align-items:center;font-size:10px}.result-analysis-card p b{font-size:10px}.result-analysis-card p span{font-weight:700}.result-analysis-card p em{font-style:normal;color:#70757a}.result-analysis-card p em.is-pink{color:#ff5c98;font-weight:700}.result-analysis-card>i{position:absolute;left:13px;right:13px;bottom:14px;height:3px;background:#e4e6e8}.result-analysis-card>i b{display:block;width:0;height:3px;background:#ffabc9;transition:width .08s linear}.result-analysis-card>strong{position:absolute;right:13px;bottom:20px;font-size:9px}
+
+@media(max-width:374px){.instagram-step3{width:100%}.instagram-search-head{padding-left:12px;padding-right:12px}.instagram-task-toast{width:calc(100vw - 24px)}.step3-task-modal{left:12px;right:12px}.instagram-compare-card{height:332px}}
+.instagram-back:disabled{opacity:1;cursor:default}
+
+/* 2026-08-25 Step 3 fidelity pass — match the user's real Instagram Explore capture */
+.instagram-step3{width:min(375px,100%);height:100dvh;min-height:100dvh;overflow-y:auto;overflow-x:hidden;background:#fff}
+.instagram-search-head{position:sticky;top:0;z-index:50;height:58px;padding:10px 18px 10px 17px;gap:11px;background:#fff;display:flex;align-items:center}
+.instagram-back{width:38px;height:38px;flex:0 0 38px;border:1px solid #eee;border-radius:50%;background:#fff;box-shadow:0 2px 7px rgba(0,0,0,.05);position:relative;padding:0}
+.instagram-back span{position:absolute;left:13px;top:11px;width:9px;height:16px}
+.instagram-back span::before,.instagram-back span::after{width:2px;height:10px;background:#1b1b1b;border-radius:2px;left:2px}
+.instagram-search-box{height:38px;border-radius:11px;background:#edf0f2;padding:0 14px;display:flex;align-items:center;font-size:15px;color:#141414;letter-spacing:-.15px}
+.instagram-search-icon{width:12px;height:12px;border:2px solid #7d8794;margin-right:10px}
+.instagram-search-icon::after{width:5px;height:2px;right:-5px;bottom:-2px;background:#7d8794}
+.instagram-tabs{position:sticky;top:58px;z-index:49;height:50px;grid-template-columns:repeat(4,1fr);font-size:14px;font-weight:400;color:#61636b;background:#fff}
+.instagram-tabs span{line-height:50px}
+.instagram-tabs .is-active{font-weight:700;color:#141414}
+.instagram-tab-rule{position:sticky;top:108px;z-index:49;height:10px;background:#fff;border-bottom:1px solid #dedee0}
+.instagram-tab-rule i{left:33px;top:2px;width:28px;height:2px;background:#141414}
+.instagram-explore-grid{grid-template-columns:repeat(2,1fr);gap:1px;padding:0 0 94px;background:#fff}
+.instagram-post-card{aspect-ratio:187.5/246;background:#eee}
+.instagram-post-card.is-ranked::after{display:none}
+.instagram-rank-badge,.instagram-check-badge{right:8px;top:8px;width:25px;height:25px;font-size:12px;background:#149df6;border:0;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.instagram-task-toast{bottom:max(18px,env(safe-area-inset-bottom));min-height:60px;border-radius:16px;padding:10px 12px 10px 14px;width:min(343px,calc(100vw - 32px))}
+.instagram-task-toast>div{grid-template-columns:34px 1fr;gap:3px 7px}.instagram-task-toast strong{font-size:12px}.instagram-task-toast span{font-size:11px;line-height:15px}.instagram-task-toast button{font-size:13px}
+
+/* Step 3-2: still feels like Explore, but only three candidates are shown at usable size. */
+.step3-compare-screen{overflow-y:hidden}
+.step3-compare-screen .instagram-compare-grid{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:246px;gap:1px;padding:0 0 94px;background:#fff}
+.instagram-compare-card{position:relative;width:100%;height:246px;border:0;padding:0;background:#eee;overflow:hidden}
+.instagram-compare-card:nth-child(3){grid-column:1}
+.instagram-compare-card img{display:block;width:100%;height:100%;object-fit:cover}
+.instagram-compare-card.is-selected::after{content:'';position:absolute;inset:0;border:2px solid #149df6;pointer-events:none}
+.instagram-media-stack{position:absolute;right:8px;top:8px;width:11px;height:11px}
+.instagram-media-stack i{position:absolute;width:8px;height:8px;border:1px solid rgba(255,255,255,.96);border-radius:1px}
+.instagram-media-stack i:first-child{right:0;bottom:0}.instagram-media-stack i:last-child{left:0;top:0}
+.step3-compare-screen .instagram-check-badge{z-index:3;right:9px;top:9px}
+.compare-stage-head,.compare-helper{display:none!important}
+
+@media(max-width:374px){
+  .instagram-search-head{padding-left:12px;padding-right:12px}.instagram-back{width:36px;height:36px;flex-basis:36px}.instagram-search-box{height:36px}
+  .step3-compare-screen .instagram-compare-grid{grid-auto-rows:calc((100vw / 2) * 1.312)}.instagram-compare-card{height:calc((100vw / 2) * 1.312)}
+}

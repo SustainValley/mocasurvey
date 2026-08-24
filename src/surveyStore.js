@@ -33,7 +33,7 @@ export async function saveSurveyProgress({ verifiedUser, page, part1Answers, par
   if (error) throw error;
 }
 
-export async function completeStudentSurvey({ verifiedUser, result, part1Answers, part2Answers, scores }) {
+export async function completeStudentSurvey({ verifiedUser, result, part1Answers, part2Answers, step3Rankings = [], step3StructureChoices = {}, scores }) {
   if (!isSupabaseConfigured) return { mode: 'local' };
   await ensureAnonymousSession();
 
@@ -64,6 +64,42 @@ export async function completeStudentSurvey({ verifiedUser, result, part1Answers
       option_position: answer.optionPosition || null,
       response_time_ms: answer.responseTimeMs || 0,
       was_modified: Boolean(answer.modified),
+    });
+  }
+
+
+  for (let index = 0; index < (step3Rankings || []).length; index += 1) {
+    const postId = step3Rankings[index];
+    const numeric = Number(String(postId).split('-').pop()) || null;
+    const group = numeric ? `V${Math.ceil(numeric / 3)}` : null;
+    responses.push({
+      part: 3,
+      question_id: `P3_RANK_${index + 1}`,
+      behavior_stage: 'overall_post_ranking',
+      selected_option: postId,
+      selected_text: `TOP ${index + 1}`,
+      linked_type: group,
+      option_position: index + 1,
+      response_time_ms: 0,
+      was_modified: false,
+    });
+  }
+
+  for (const groupId of ['V1', 'V2', 'V3']) {
+    const postId = step3StructureChoices?.[groupId];
+    if (!postId) continue;
+    const numeric = Number(String(postId).split('-').pop()) || 0;
+    const positionInGroup = numeric ? ((numeric - 1) % 3) + 1 : null;
+    responses.push({
+      part: 3,
+      question_id: `P3_STRUCTURE_${groupId}`,
+      behavior_stage: 'structure_preference',
+      selected_option: postId,
+      selected_text: `${groupId} structure choice`,
+      linked_type: groupId,
+      option_position: positionInGroup,
+      response_time_ms: 0,
+      was_modified: false,
     });
   }
 
