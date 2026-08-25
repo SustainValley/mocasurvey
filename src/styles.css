@@ -211,7 +211,7 @@ button{cursor:pointer}
 .back-to-my-result{position:absolute;left:16px;top:62px;border:0;background:transparent;color:#6e7378;padding:0;font-size:10px;line-height:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
 .result-secondary-card.is-preview-card{background:color-mix(in srgb,var(--accent) 23%,#fff);border:1px dashed #9aa1a5}
 
-/* Offline booth guide — Figma MOCA_07_Offline_Booth_Guide */
+/* Offline booth guide �� Figma MOCA_07_Offline_Booth_Guide */
 .offline-guide-screen{min-height:max(1000px,100dvh);overflow:hidden}
 .offline-guide-screen .design-canvas{height:1000px}
 .offline-guide-screen .grid-bg{inset:0;background-color:#fff;background-image:linear-gradient(to right,#e0ebf0 1px,transparent 1px),linear-gradient(to bottom,#e0ebf0 1px,transparent 1px);background-size:40px 40px;background-position:27px 19px;background-repeat:repeat}
@@ -234,7 +234,7 @@ button{cursor:pointer}
 .offline-back{position:absolute;left:16px;top:874px;width:343px;height:54px;border:0;background:#212426;color:#fff;font-size:13px;font-weight:700}
 .offline-note{position:absolute;left:16px;top:944px;width:343px;margin:0;color:#6e7075;font-size:10px;line-height:12px}
 
-/* Already participated — Figma MOCA_07_Already_Participated */
+/* Already participated �� Figma MOCA_07_Already_Participated */
 .already-screen .pink-rail{background:#fadbe5;opacity:.78}
 .already-page{position:absolute;inset:0}
 .already-kicker{position:absolute;left:24px;top:95px;width:220px;margin:0;color:#6e7378;font-size:10px;line-height:12px;font-weight:700}
@@ -323,7 +323,7 @@ button{cursor:pointer}
   outline-offset:2px;
 }
 
-/* Step 3 — Instagram-inspired content preference flow */
+/* Step 3 �� Instagram-inspired content preference flow */
 .instagram-step3{position:relative;width:min(375px,100%);min-height:100dvh;margin:0 auto;background:#fff;color:#111;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Kim Jung Chul Gothic',sans-serif}
 .instagram-search-head{position:sticky;top:0;z-index:20;height:62px;background:#fff;display:flex;align-items:center;padding:8px 16px 7px;gap:10px}
 .instagram-back{position:relative;width:42px;height:42px;flex:0 0 42px;border:1px solid #efefef;border-radius:50%;background:#fff;padding:0;box-shadow:0 2px 7px rgba(0,0,0,.045)}
@@ -348,21 +348,21 @@ button{cursor:pointer}
 .instagram-task-toast>div{display:grid;grid-template-columns:34px 1fr;gap:4px 8px;align-items:start;min-width:0;flex:1}.instagram-task-toast strong{grid-row:1/3;font-size:12px;line-height:18px}.instagram-task-toast span{font-size:11px;line-height:15px;color:#f4f4f4}.instagram-task-toast button{border:0;background:transparent;color:#fff;font-size:13px;font-weight:700;padding:10px 5px 10px 14px;white-space:nowrap}.instagram-task-toast button:disabled{opacity:.35;cursor:default}
 
 .step3-loading-screen .grid-bg,.result-loading-screen .grid-bg{background-color:#fff;background-image:linear-gradient(to right,#e0ebf0 1px,transparent 1px),linear-gradient(to bottom,#e0ebf0 1px,transparent 1px);background-size:40px 40px;background-position:27px 19px}
-.step3-loading-head{position:absolute;left:16px;top:82px;width:343px;height:62px}.step3-loading-head>p{margin:0;font-size:10px;line-height:12px;color:#6d7277;font-weight:700}.step3-loading-head>div{margin-top:7px;display:flex;align-items:baseline}.step3-loading-head strong{font-size:22px}.step3-loading-head span{margin-left:10px;font-size:12px;font-weight:700}.step3-loading-head em{margin-left:auto;font-size:10px;font-style:normal;color:#6d7277;font-weight:700}.step3-loading-head>i{position:absolute;left:0;bottom:0;width:343px;height:2px;background:#d7dddf}.step3-loading-head>i b{display:block;width:56%;height:2px;background:#ffabc9;animation:mocaConnect 3.1s cubic-bezier(.2,.7,.2,1) forwards}@keyframes mocaConnect{0%{width:0%}100%{width:100%}}
+.step3-loading-head{position:absolute;left:16px;top:82px;width:343px;height:62px}.step3-loading-head>p{margin:0;font-size:10px;line-height:12px;color:#6d7277;font-weight:700}.step3-loading-head>div{margin-top:7px;display:flex;align-items:baseline}.step3-loading-head strong{font-size:22px}.step3-loading-head span{margin-left:10px;font-size:12px;font-weight:700}.step3-loading-head em{margin-left:auto;font-size:10px;font-style:normal;color:#6d7277;font-weight:700}.step3-loading-head>i{position:absolute;left:0;bottom:0;width:343px;height:2px;background:#d7dddf}.step3-loading-head>i b{display:block;width:56%;height:2px;background:#ffabc9;animation:mocaConnect 1.45s ease-in-out forwards}@keyframes mocaConnect{0%{width:12%}100%{width:94%}}
 .step3-loading-copy{position:absolute;left:16px;top:210px;width:343px}.step3-loading-copy p{margin:0 0 13px;color:#7b7f83;font-size:10px;font-weight:700}.step3-loading-copy h2{margin:0;font-size:34px;line-height:1.12;letter-spacing:-1.3px}.step3-loading-copy span{display:block;margin-top:15px;color:#666b70;font-size:12px;line-height:17px}
-.step3-loading-module{position:absolute;left:16px;top:425px;width:343px;height:182px;border:1px solid #252729;background:rgba(255,255,255,.92);padding:18px}.loading-window{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;height:88px}.loading-window i{display:block;background:linear-gradient(145deg,#f8dce9,#edf3f5)}.loading-window i:nth-child(2){background:linear-gradient(145deg,#e8f3f0,#cbded8)}.loading-window i:nth-child(3){background:linear-gradient(145deg,#f5f1cf,#e5c99e)}.loading-window i:nth-child(4){background:linear-gradient(145deg,#e3d8ee,#c9bdd9)}.loading-track{margin-top:18px;height:3px;background:#e2e4e6}.loading-track i{display:block;height:3px;background:#252729;animation:mocaModuleLoad 3.1s cubic-bezier(.2,.7,.2,1) forwards}@keyframes mocaModuleLoad{from{width:0%}to{width:100%}}.step3-loading-module>p{display:flex;justify-content:space-between;margin:12px 0 0;font-size:9px;color:#666b70}.step3-loading-module>p b{color:#252729}
+.step3-loading-module{position:absolute;left:16px;top:425px;width:343px;height:182px;border:1px solid #252729;background:rgba(255,255,255,.92);padding:18px}.loading-window{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;height:88px}.loading-window i{display:block;background:linear-gradient(145deg,#f8dce9,#edf3f5)}.loading-window i:nth-child(2){background:linear-gradient(145deg,#e8f3f0,#cbded8)}.loading-window i:nth-child(3){background:linear-gradient(145deg,#f5f1cf,#e5c99e)}.loading-window i:nth-child(4){background:linear-gradient(145deg,#e3d8ee,#c9bdd9)}.loading-track{margin-top:18px;height:3px;background:#e2e4e6}.loading-track i{display:block;height:3px;background:#252729;animation:mocaModuleLoad 1.45s ease forwards}@keyframes mocaModuleLoad{from{width:10%}to{width:86%}}.step3-loading-module>p{display:flex;justify-content:space-between;margin:12px 0 0;font-size:9px;color:#666b70}.step3-loading-module>p b{color:#252729}
 
 .step3-modal-screen{height:100dvh;overflow:hidden}.step3-modal-screen .instagram-explore-grid{filter:saturate(.75)}.step3-modal-dim{position:absolute;z-index:40;inset:0;background:rgba(0,0,0,.48);backdrop-filter:blur(1px)}.step3-task-modal{position:absolute;z-index:41;left:16px;right:16px;bottom:68px;border-radius:22px;background:#fff;padding:25px 20px 20px;box-shadow:0 18px 55px rgba(0,0,0,.28)}.step3-task-modal>i{display:block;width:42px;height:3px;background:#ffabc9;margin-bottom:16px}.step3-task-modal>p{margin:0;color:#72767b;font-size:10px;line-height:13px;font-weight:700}.step3-task-modal h2{margin:18px 0 13px;font-family:'Kim Jung Chul Gothic',sans-serif;font-size:30px;line-height:1.05;letter-spacing:-1.1px}.step3-task-modal>span{display:block;color:#676c71;font-family:'Kim Jung Chul Gothic',sans-serif;font-size:11px;line-height:16px}.step3-task-modal button{width:100%;height:50px;margin-top:24px;border:0;border-radius:11px;background:#151515;color:#fff;font-size:13px;font-weight:700}
 
 .compare-stage-head{height:54px;padding:0 16px;display:flex;align-items:center;border-bottom:1px solid #eee;background:#fff}.compare-stage-head button{width:30px;border:0;background:transparent;padding:0;text-align:left;font-size:17px}.compare-stage-head span{font-size:13px;font-weight:700}.compare-stage-head em{margin-left:auto;font-style:normal;font-size:10px;color:#777;font-weight:700}.instagram-compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:18px 0 0;background:#fff}.instagram-compare-card{position:relative;height:346px;border:0;padding:0;background:#eee;overflow:hidden}.instagram-compare-card img{width:100%;height:100%;object-fit:cover;display:block}.instagram-compare-card.is-selected::after{content:'';position:absolute;inset:0;border:3px solid #0095f6}.instagram-compare-card .instagram-check-badge{right:7px;top:7px}.compare-helper{margin:18px 16px 0;color:#777;font-size:11px;line-height:15px;text-align:center}.compare-toast>div{grid-template-columns:32px 1fr}
 
 .result-loading-instagram{position:absolute;left:0;top:0;width:375px;height:300px;background:#fff;opacity:.2;filter:blur(.25px);mask-image:linear-gradient(to bottom,#000 35%,transparent 100%)}.result-loading-search{position:absolute;left:16px;top:20px;width:343px;height:42px;border-radius:12px;background:#e6e7e9}.result-loading-search i{position:absolute;left:18px;top:13px;width:14px;height:14px;border:2px solid #999;border-radius:50%}.result-loading-search span{position:absolute;left:48px;top:16px;width:72px;height:8px;background:#b8bbbe}.result-loading-tabs{position:absolute;top:82px;left:16px;right:16px;display:flex;justify-content:space-between}.result-loading-tabs i{width:46px;height:8px;background:#c8cbcd}.result-loading-tiles{position:absolute;left:0;top:118px;right:0;display:grid;grid-template-columns:repeat(2,1fr);gap:1px}.result-loading-tiles i{height:164px;background:linear-gradient(145deg,#e8e8e8,#f7f7f7)}
-.result-loading-copy{position:absolute;left:16px;top:338px;width:343px}.result-loading-copy>p{margin:0;color:#6d7277;font-size:10px;font-weight:700}.result-loading-copy>em{position:absolute;right:0;top:0;font-size:10px;font-style:normal;color:#6d7277;font-weight:700}.result-loading-copy h2{margin:20px 0 11px;font-size:32px;line-height:1.1;letter-spacing:-1.2px}.result-loading-copy>span{display:block;color:#666b70;font-size:11px;line-height:16px}.result-analysis-card{position:relative;margin-top:34px;border:1px solid #252729;background:#fff;padding:18px 13px 30px}.result-analysis-card p{display:grid;grid-template-columns:26px 1fr auto;gap:7px;margin:0 0 14px;align-items:center;font-size:10px}.result-analysis-card p b{font-size:10px}.result-analysis-card p span{font-weight:700}.result-analysis-card p em{font-style:normal;color:#70757a}.result-analysis-card p em.is-pink{color:#ff5c98;font-weight:700}.result-analysis-card>i{position:absolute;left:13px;right:13px;bottom:14px;height:3px;background:#e4e6e8}.result-analysis-card>i b{display:block;width:0;height:3px;background:#ffabc9;transition:width .08s linear}.result-analysis-card>strong{position:absolute;right:13px;bottom:20px;font-size:9px}
+.result-loading-copy{position:absolute;left:16px;top:338px;width:343px}.result-loading-copy>p{margin:0;color:#6d7277;font-size:10px;font-weight:700}.result-loading-copy>em{position:absolute;right:0;top:0;font-size:10px;font-style:normal;color:#6d7277;font-weight:700}.result-loading-copy h2{margin:20px 0 11px;font-size:32px;line-height:1.1;letter-spacing:-1.2px}.result-loading-copy>span{display:block;color:#666b70;font-size:11px;line-height:16px}.result-analysis-card{position:relative;margin-top:34px;border:1px solid #252729;background:#fff;padding:18px 13px 30px}.result-analysis-card p{display:grid;grid-template-columns:26px 1fr auto;gap:7px;margin:0 0 14px;align-items:center;font-size:10px}.result-analysis-card p b{font-size:10px}.result-analysis-card p span{font-weight:700}.result-analysis-card p em{font-style:normal;color:#70757a}.result-analysis-card p em.is-pink{color:#ff5c98;font-weight:700}.result-analysis-card>i{position:absolute;left:13px;right:13px;bottom:14px;height:3px;background:#e4e6e8}.result-analysis-card>i b{display:block;width:84%;height:3px;background:#ffabc9}.result-analysis-card>strong{position:absolute;right:13px;bottom:20px;font-size:9px}
 
 @media(max-width:374px){.instagram-step3{width:100%}.instagram-search-head{padding-left:12px;padding-right:12px}.instagram-task-toast{width:calc(100vw - 24px)}.step3-task-modal{left:12px;right:12px}.instagram-compare-card{height:332px}}
 .instagram-back:disabled{opacity:1;cursor:default}
 
-/* 2026-08-25 Step 3 fidelity pass — match the user's real Instagram Explore capture */
+/* 2026-08-25 Step 3 fidelity pass �� match the user's real Instagram Explore capture */
 .instagram-step3{width:min(375px,100%);height:100dvh;min-height:100dvh;overflow-y:auto;overflow-x:hidden;background:#fff}
 .instagram-search-head{position:sticky;top:0;z-index:50;height:58px;padding:10px 18px 10px 17px;gap:11px;background:#fff;display:flex;align-items:center}
 .instagram-back{width:38px;height:38px;flex:0 0 38px;border:1px solid #eee;border-radius:50%;background:#fff;box-shadow:0 2px 7px rgba(0,0,0,.05);position:relative;padding:0}
@@ -399,4 +399,226 @@ button{cursor:pointer}
 @media(max-width:374px){
   .instagram-search-head{padding-left:12px;padding-right:12px}.instagram-back{width:36px;height:36px;flex-basis:36px}.instagram-search-box{height:36px}
   .step3-compare-screen .instagram-compare-grid{grid-auto-rows:calc((100vw / 2) * 1.312)}.instagram-compare-card{height:calc((100vw / 2) * 1.312)}
+}
+
+/* 2026-08-25 FINAL FIX: Instagram back button �� single CSS chevron only */
+.instagram-back{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:38px!important;
+  height:38px!important;
+  min-width:38px!important;
+  min-height:38px!important;
+  flex:0 0 38px!important;
+  padding:0!important;
+  margin:0!important;
+  border:1px solid #eeeeee!important;
+  border-radius:50%!important;
+  background:#ffffff!important;
+  color:#171717!important;
+  box-shadow:0 2px 7px rgba(0,0,0,.05)!important;
+  appearance:none;
+  -webkit-appearance:none;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* App.jsx currently renders: <button className="instagram-back"><span /></button> */
+.instagram-back > span{
+  position:static!important;
+  display:block!important;
+  width:10px!important;
+  height:10px!important;
+  margin:0 0 0 4px!important;
+  padding:0!important;
+  border:0!important;
+  border-left:2px solid #171717!important;
+  border-bottom:2px solid #171717!important;
+  border-radius:1px!important;
+  background:transparent!important;
+  transform:rotate(45deg)!important;
+  transform-origin:center!important;
+  box-shadow:none!important;
+}
+
+/* Kill every old pseudo-element arrow so Safari cannot stack them. */
+.instagram-back > span::before,
+.instagram-back > span::after,
+.instagram-back::before,
+.instagram-back::after{
+  content:none!important;
+  display:none!important;
+  width:0!important;
+  height:0!important;
+  border:0!important;
+  background:transparent!important;
+  transform:none!important;
+  box-shadow:none!important;
+}
+
+.instagram-back:focus,
+.instagram-back:active{
+  outline:none!important;
+}
+
+@media(max-width:374px){
+  .instagram-back{
+    width:36px!important;
+    height:36px!important;
+    min-width:36px!important;
+    min-height:36px!important;
+    flex-basis:36px!important;
+  }
+}
+
+/* =========================================================
+   2026-08-25 FINAL: Instagram back button — SVG only
+   Removes every legacy CSS-drawn arrow and renders one stable chevron.
+   ========================================================= */
+.instagram-back{
+  position:relative!important;
+  width:38px!important;
+  height:38px!important;
+  min-width:38px!important;
+  min-height:38px!important;
+  max-width:38px!important;
+  max-height:38px!important;
+  flex:0 0 38px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:0!important;
+  margin:0!important;
+  border:1px solid #eeeeee!important;
+  border-radius:50%!important;
+  background:#fff!important;
+  color:#171717!important;
+  box-shadow:0 2px 7px rgba(0,0,0,.05)!important;
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  overflow:hidden!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+.instagram-back>span,
+.instagram-back>i,
+.instagram-back-chevron{display:none!important}
+.instagram-back::before,
+.instagram-back::after,
+.instagram-back>span::before,
+.instagram-back>span::after,
+.instagram-back-chevron::before,
+.instagram-back-chevron::after{
+  content:none!important;
+  display:none!important;
+  width:0!important;
+  height:0!important;
+  border:0!important;
+  background:none!important;
+  transform:none!important;
+  box-shadow:none!important;
+}
+.instagram-back-svg{
+  display:block!important;
+  position:static!important;
+  width:20px!important;
+  height:20px!important;
+  min-width:20px!important;
+  min-height:20px!important;
+  max-width:20px!important;
+  max-height:20px!important;
+  flex:0 0 20px!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:visible!important;
+  color:#171717!important;
+  transform:none!important;
+  pointer-events:none!important;
+}
+.instagram-back-svg path{
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:2!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+.instagram-back:disabled{opacity:1!important;cursor:default!important}
+@media(max-width:374px){
+  .instagram-back{
+    width:36px!important;
+    height:36px!important;
+    min-width:36px!important;
+    min-height:36px!important;
+    max-width:36px!important;
+    max-height:36px!important;
+    flex-basis:36px!important;
+  }
+  .instagram-back-svg{
+    width:19px!important;
+    height:19px!important;
+    min-width:19px!important;
+    min-height:19px!important;
+    max-width:19px!important;
+    max-height:19px!important;
+  }
+}
+
+
+/* 2026-08-26 Step 3 Instagram image cleanup
+   - remove non-Instagram image frames / outlines
+   - crop tiny white/rounded edges baked into source captures
+   - remove compare media-stack decoration; selection is badge-only
+*/
+.instagram-explore-grid,
+.instagram-compare-grid{
+  background:#fff!important;
+  gap:1px!important;
+}
+.instagram-post-card,
+.instagram-compare-card{
+  border:0!important;
+  outline:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:#fff!important;
+  padding:0!important;
+  margin:0!important;
+  overflow:hidden!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+}
+.instagram-post-card img,
+.instagram-compare-card img{
+  width:100%!important;
+  height:100%!important;
+  display:block!important;
+  object-fit:cover!important;
+  border:0!important;
+  outline:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  /* Some FigJam source captures contain a 1–3px light frame.
+     A tiny overscan crops that frame while keeping the post composition intact. */
+  transform:scale(1.025)!important;
+  transform-origin:center!important;
+}
+.instagram-post-card::before,
+.instagram-post-card::after,
+.instagram-compare-card::before,
+.instagram-compare-card::after{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+.instagram-post-card.is-ranked::after,
+.instagram-compare-card.is-selected::after{
+  display:none!important;
+  content:none!important;
+}
+.instagram-media-stack,
+.instagram-media-stack i{
+  display:none!important;
+}
+.instagram-rank-badge,
+.instagram-check-badge{
+  z-index:4!important;
 }

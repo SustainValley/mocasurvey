@@ -95,6 +95,17 @@ function saveCompletedRecord(studentId, record) {
   writeJson(COMPLETED_KEY, records);
 }
 
+function clearLocalStudentRecord(studentId) {
+  if (typeof window === 'undefined') return;
+  try { window.localStorage.removeItem(SESSION_KEY); } catch (error) { /* ignore */ }
+  if (!studentId) return;
+  const records = readJson(COMPLETED_KEY, {});
+  if (records[String(studentId)]) {
+    delete records[String(studentId)];
+    writeJson(COMPLETED_KEY, records);
+  }
+}
+
 const Logo = () => <img className="moca-logo" src="/logo.png" alt="Cafe Moca" />;
 
 function Screen({ className = '', children }) {
@@ -258,7 +269,11 @@ function InstagramChrome({ children, footer, className = '', onBack }) {
   return (
     <main className={`instagram-step3 ${className}`}>
       <header className="instagram-search-head">
-        <button type="button" className="instagram-back" aria-label="뒤로가기" onClick={onBack} disabled={!onBack}><span /></button>
+        <button type="button" className="instagram-back" aria-label="뒤로가기" onClick={onBack} disabled={!onBack}>
+          <svg className="instagram-back-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M15 4.5L7.5 12L15 19.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
         <div className="instagram-search-box" aria-label="검색어 카페 추천">
           <span className="instagram-search-icon" aria-hidden="true" />
           <span>카페 추천</span>
@@ -383,7 +398,6 @@ function Step3Compare({ index, choices, onSelect, onBack }) {
             aria-pressed={selectedId === post.id}
           >
             <img src={post.image} alt={post.alt} onError={(event) => { if (post.fallback && event.currentTarget.src !== `${window.location.origin}${post.fallback}`) event.currentTarget.src = post.fallback; }} />
-            <span className="instagram-media-stack" aria-hidden="true"><i /><i /></span>
             {selectedId === post.id && <span className="instagram-check-badge">✓</span>}
           </button>
         ))}
@@ -773,18 +787,20 @@ function decideFromComparison(mode, candidates, compareAnswers, baseScores) {
 
 export default function App() {
   const initialState = useMemo(() => {
+    // Supabase가 연결된 배포 환경에서는 localStorage를 로그인 근거로 사용하지 않습니다.
+    // Safari에 예전 값이 남아 있어도 사용자가 다시 학번/이름을 확인하면 서버 기록을 기준으로 판정합니다.
+    if (isSupabaseConfigured) {
+      return { session: null, auth: null, completed: null, restoredPage: 'start' };
+    }
+
+    // Supabase 미설정 로컬 개발에서만 기존 로컬 복원을 허용합니다.
     const session = loadSession();
     const auth = loadAuth();
     const verified = session?.verifiedUser || auth || null;
     const completed = verified?.studentId ? getCompletedRecord(verified.studentId) : null;
-
     let restoredPage = session?.page || 'start';
-    if (completed?.result && (!session || restoredPage === 'start' || restoredPage === 'upload' || restoredPage === 'review')) {
-      restoredPage = 'already';
-    } else if (verified && (!session || restoredPage === 'start' || restoredPage === 'upload' || restoredPage === 'review')) {
-      restoredPage = 'part1';
-    }
-
+    if (completed?.result && (!session || restoredPage === 'start' || restoredPage === 'upload' || restoredPage === 'review')) restoredPage = 'already';
+    else if (verified && (!session || restoredPage === 'start' || restoredPage === 'upload' || restoredPage === 'review')) restoredPage = 'part1';
     return { session, auth: verified, completed, restoredPage };
   }, []);
   const initialSession = initialState.session;
@@ -892,8 +908,6 @@ export default function App() {
   const beginSurveyOrRestore = async (data) => {
     setIsClaiming(true);
     setServerError('');
-    saveAuth(data);
-    setVerifiedUser(data);
 
     try {
       const serverRecord = await claimStudentSurvey(data);
@@ -908,6 +922,8 @@ export default function App() {
           offlineParticipatedAt: serverRecord.offlineParticipatedAt || null,
           serverCompleted: true,
         };
+        saveAuth(restored.verifiedUser);
+        setVerifiedUser(restored.verifiedUser);
         saveCompletedRecord(data.studentId, restored);
         setExistingRecord(restored);
         setResult(restored.result);
@@ -920,6 +936,25 @@ export default function App() {
         setServerError('이 학번으로 다른 기기에서 설문이 진행 중이에요. 잠시 후 다시 시도해주세요.');
         return;
       }
+      if (isSupabaseConfigured && serverRecord?.status === 'claimed') {
+        // 서버에 완료 기록이 없으면 예전 Safari localStorage 결과는 버리고 새 설문으로 시작합니다.
+        clearLocalStudentRecord(data.studentId);
+        saveAuth(data);
+        setVerifiedUser(data);
+        setExistingRecord(null);
+        setResult(null);
+        setPart1Answers(Array(PART1_QUESTIONS.length).fill(null));
+        setPart2Answers(Array(PART2_QUESTIONS.length).fill(null));
+        setComparison(null);
+        setCompareAnswers([]);
+        setStep3Rankings([]);
+        setStep3StructureChoices({});
+        setPart1Index(0);
+        setPart2Index(0);
+        setPage('part1');
+        setQuestionStartedAt(Date.now());
+        return;
+      }
     } catch (error) {
       console.error('Supabase claim failed', error);
       if (isSupabaseConfigured) {
@@ -930,6 +965,9 @@ export default function App() {
       setIsClaiming(false);
     }
 
+    // Supabase가 없는 로컬 개발 모드에서만 localStorage 기록으로 복원합니다.
+    saveAuth(data);
+    setVerifiedUser(data);
     const prior = getCompletedRecord(data.studentId);
     if (prior?.result) {
       setExistingRecord(prior);
