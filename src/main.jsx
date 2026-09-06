@@ -4,4 +4,5 @@ import App from './App.jsx';
 import './styles.css';
 import './step3Fix.css';
 import './offlineParticipationCopy.js';
+import './runtimeAnalytics.js';
 createRoot(document.getElementById('root')).render(<App />);
