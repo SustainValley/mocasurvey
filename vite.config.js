@@ -9,30 +9,37 @@ function mocaSurveyAdjustments() {
       if (id.endsWith('/src/App.jsx')) {
         let next = code;
 
-        // Step 3-1 must always show exactly the 18 images supplied by the user.
-        // Only their display order is shuffled. P3-19~21 are comparison-only extras.
-        const exactStep3ImagePaths = [
-          '/step3/user-01.svg',
-          '/step3/user-02.svg',
-          '/step3/user-03.svg',
-          '/step3/user-04.svg',
-          '/step3/user-05.svg',
-          '/step3/user-06.svg',
-          '/step3/user-07.svg',
-          '/step3/user-08.svg',
-          '/step3/user-09.svg',
-          '/step3/user-10.svg',
-          '/step3/user-11.svg',
-          '/step3/user-12.svg',
-          '/step3/user-13.svg',
-          '/step3/user-13.svg', // the 14th supplied image is the same Persimmon Coffee photo
-          '/step3/user-15.svg',
-          '/step3/user-16.svg',
-          '/step3/user-17.svg',
-          '/step3/user-18.svg',
+        // Step 3 uses one master set of 24 user-supplied images.
+        // Step 3-1 always shows all 24; only their display order is randomized.
+        const step3ImagePaths = [
+          '/step3/post-01.png',
+          '/step3/post-02.png',
+          '/step3/post-03.png',
+          '/step3/post-04.jpeg',
+          '/step3/post-05.png',
+          '/step3/post-06.png',
+          '/step3/post-07.png',
+          '/step3/post-08.jpeg',
+          '/step3/post-09.png',
+          '/step3/post-10.png',
+          '/step3/post-11.png',
+          '/step3/post-12.jpeg',
+          '/step3/post-13.png',
+          '/step3/post-14.png',
+          '/step3/post-15.png',
+          '/step3/post-16.png',
+          '/step3/post-17.png',
+          '/step3/post-18.png',
+          '/step3/post-19.png',
+          '/step3/post-20.png',
+          '/step3/post-21.png',
+          '/step3/post-22.png',
+          '/step3/post-23.png',
+          '/step3/post-24.png',
         ];
 
-        exactStep3ImagePaths.forEach((localPath, zeroIndex) => {
+        // Replace the original 1~18 image sources with the local originals.
+        step3ImagePaths.slice(0, 18).forEach((localPath, zeroIndex) => {
           const index = zeroIndex + 1;
           const number = String(index).padStart(2, '0');
           const postId = `P3-${number}`;
@@ -45,12 +52,16 @@ function mocaSurveyAdjustments() {
           );
         });
 
-        // These three images are only for Step 3-2 comparisons.
+        // Add 19~24 to the same master feed. One extra image is assigned to each
+        // internal V group so the first-step stimulus pool stays balanced at 4 per group.
         if (!next.includes("id: 'P3-19'")) {
           const additions = [
-            "  { id: 'P3-19', group: 'V1', image: '/step3/post-19.webp', fallback: '/step3/post-19.webp', alt: '개인 카페 비교 게시물 19' },",
-            "  { id: 'P3-20', group: 'V2', image: '/step3/post-20.webp', fallback: '/step3/post-20.webp', alt: '개인 카페 비교 게시물 20' },",
-            "  { id: 'P3-21', group: 'V3', image: '/step3/post-21.webp', fallback: '/step3/post-21.webp', alt: '개인 카페 비교 게시물 21' },",
+            "  { id: 'P3-19', group: 'V1', image: '/step3/post-19.png', fallback: '/step3/post-19.png', alt: '개인 카페 추천 게시물 19' },",
+            "  { id: 'P3-20', group: 'V2', image: '/step3/post-20.png', fallback: '/step3/post-20.png', alt: '개인 카페 추천 게시물 20' },",
+            "  { id: 'P3-21', group: 'V3', image: '/step3/post-21.png', fallback: '/step3/post-21.png', alt: '개인 카페 추천 게시물 21' },",
+            "  { id: 'P3-22', group: 'V4', image: '/step3/post-22.png', fallback: '/step3/post-22.png', alt: '개인 카페 추천 게시물 22' },",
+            "  { id: 'P3-23', group: 'V5', image: '/step3/post-23.png', fallback: '/step3/post-23.png', alt: '개인 카페 추천 게시물 23' },",
+            "  { id: 'P3-24', group: 'V6', image: '/step3/post-24.png', fallback: '/step3/post-24.png', alt: '개인 카페 추천 게시물 24' },",
           ].join('\n');
 
           next = next.replace(
@@ -59,27 +70,27 @@ function mocaSurveyAdjustments() {
           );
         }
 
-        // Step 3-2: keep the three additional images in their intended comparison stages.
+        // Step 3-2 reuses photos from the same 24-image master set.
+        // Stage 1 = 1~4, Stage 2 = 5~8, Stage 3 = 9~12.
         next = next
           .replace(
-            "{ id: 'V1', postIds: ['P3-01', 'P3-02', 'P3-03'] },",
-            "{ id: 'V1', postIds: ['P3-01', 'P3-02', 'P3-03', 'P3-19'] },",
+            /\{ id: 'V1', postIds: \[[^\]]+\] \},/,
+            "{ id: 'V1', postIds: ['P3-01', 'P3-02', 'P3-03', 'P3-04'] },",
           )
           .replace(
-            "{ id: 'V2', postIds: ['P3-04', 'P3-05', 'P3-06'] },",
-            "{ id: 'V2', postIds: ['P3-10', 'P3-11', 'P3-12', 'P3-20'] },",
+            /\{ id: 'V2', postIds: \[[^\]]+\] \},/,
+            "{ id: 'V2', postIds: ['P3-05', 'P3-06', 'P3-07', 'P3-08'] },",
           )
           .replace(
-            "{ id: 'V3', postIds: ['P3-07', 'P3-08', 'P3-09'] },",
-            "{ id: 'V3', postIds: ['P3-04', 'P3-05', 'P3-06', 'P3-21'] },",
+            /\{ id: 'V3', postIds: \[[^\]]+\] \},/,
+            "{ id: 'V3', postIds: ['P3-09', 'P3-10', 'P3-11', 'P3-12'] },",
           );
 
-        // Step 3-1: every one of the original 18 posts appears exactly once;
-        // Fisher-Yates changes only their order each time this screen mounts.
+        // Step 3-1: Fisher-Yates shuffles the order only. All 24 images remain present.
         if (!next.includes('function shuffleStep3Posts(posts)')) {
           next = next.replace(
             'function Step3Rank({ rankings, onChange, onNext, onBack }) {',
-            `function shuffleStep3Posts(posts) {\n  const shuffled = [...posts];\n  for (let index = shuffled.length - 1; index > 0; index -= 1) {\n    const randomIndex = Math.floor(Math.random() * (index + 1));\n    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];\n  }\n  return shuffled;\n}\n\nfunction Step3Rank({ rankings, onChange, onNext, onBack }) {\n  const rankPosts = useMemo(() => shuffleStep3Posts(STEP3_POSTS.slice(0, 18)), []);`,
+            `function shuffleStep3Posts(posts) {\n  const shuffled = [...posts];\n  for (let index = shuffled.length - 1; index > 0; index -= 1) {\n    const randomIndex = Math.floor(Math.random() * (index + 1));\n    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];\n  }\n  return shuffled;\n}\n\nfunction Step3Rank({ rankings, onChange, onNext, onBack }) {\n  const rankPosts = useMemo(() => shuffleStep3Posts(STEP3_POSTS), []);`,
           );
           next = next.replace('{STEP3_POSTS.map((post) => {', '{rankPosts.map((post) => {');
         }
@@ -111,11 +122,11 @@ function mocaSurveyAdjustments() {
           )
           .replace('aria-label="카페 추천 게시물 선택"', 'aria-label="개인 카페 추천 게시물 선택"');
 
-        if (!next.includes("id: 'P3-19'") || !next.includes("'P3-19']") || !next.includes("'P3-20']") || !next.includes("'P3-21']")) {
-          this.error('CAFE MOCA Step 3 comparison image injection failed because App.jsx structure changed.');
+        if (!next.includes("id: 'P3-24'") || !next.includes("'P3-04']") || !next.includes("'P3-08']") || !next.includes("'P3-12']")) {
+          this.error('CAFE MOCA Step 3 24-image configuration failed because App.jsx structure changed.');
         }
-        if (!next.includes('STEP3_POSTS.slice(0, 18)') || !next.includes('rankPosts.map((post) => {')) {
-          this.error('CAFE MOCA Step 3 exact-18 random-order injection failed because App.jsx structure changed.');
+        if (!next.includes('shuffleStep3Posts(STEP3_POSTS)') || !next.includes('rankPosts.map((post) => {')) {
+          this.error('CAFE MOCA Step 3 random-order injection failed because App.jsx structure changed.');
         }
 
         return { code: next, map: null };
