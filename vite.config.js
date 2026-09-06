@@ -9,13 +9,33 @@ function mocaSurveyAdjustments() {
       if (id.endsWith('/src/App.jsx')) {
         let next = code;
 
-        // Keep the original 18 Step 3 images local and stable.
-        // The remote FigJam/MCP asset URLs can change or expire, so the app should
-        // always render the checked-in public/step3/post-01~18.jpg files instead.
-        for (let index = 1; index <= 18; index += 1) {
+        // Step 3-1 must always show exactly the 18 images supplied by the user.
+        // Only their display order is shuffled. P3-19~21 are comparison-only extras.
+        const exactStep3ImagePaths = [
+          '/step3/user-01.svg',
+          '/step3/user-02.svg',
+          '/step3/user-03.svg',
+          '/step3/user-04.svg',
+          '/step3/user-05.svg',
+          '/step3/user-06.svg',
+          '/step3/user-07.svg',
+          '/step3/user-08.svg',
+          '/step3/user-09.svg',
+          '/step3/user-10.svg',
+          '/step3/user-11.svg',
+          '/step3/user-12.svg',
+          '/step3/user-13.svg',
+          '/step3/user-13.svg', // the 14th supplied image is the same Persimmon Coffee photo
+          '/step3/user-15.svg',
+          '/step3/user-16.svg',
+          '/step3/user-17.svg',
+          '/step3/user-18.svg',
+        ];
+
+        exactStep3ImagePaths.forEach((localPath, zeroIndex) => {
+          const index = zeroIndex + 1;
           const number = String(index).padStart(2, '0');
           const postId = `P3-${number}`;
-          const localPath = `/step3/post-${number}.jpg`;
           const postPattern = new RegExp(
             `(\\{ id: '${postId}', group: 'V\\d', )image: '[^']+', fallback: '[^']+', alt: '[^']+'( \\},)`,
           );
@@ -23,15 +43,14 @@ function mocaSurveyAdjustments() {
             postPattern,
             `$1image: '${localPath}', fallback: '${localPath}', alt: '개인 카페 추천 게시물 ${index}'$2`,
           );
-        }
+        });
 
-        // Add the three newly supplied images. They are used in both the first
-        // Instagram feed and the corresponding Step 3-2 comparison stage.
+        // These three images are only for Step 3-2 comparisons.
         if (!next.includes("id: 'P3-19'")) {
           const additions = [
-            "  { id: 'P3-19', group: 'V1', image: '/step3/post-19.webp', fallback: '/step3/post-19.webp', alt: '개인 카페 추천 게시물 19' },",
-            "  { id: 'P3-20', group: 'V2', image: '/step3/post-20.webp', fallback: '/step3/post-20.webp', alt: '개인 카페 추천 게시물 20' },",
-            "  { id: 'P3-21', group: 'V3', image: '/step3/post-21.webp', fallback: '/step3/post-21.webp', alt: '개인 카페 추천 게시물 21' },",
+            "  { id: 'P3-19', group: 'V1', image: '/step3/post-19.webp', fallback: '/step3/post-19.webp', alt: '개인 카페 비교 게시물 19' },",
+            "  { id: 'P3-20', group: 'V2', image: '/step3/post-20.webp', fallback: '/step3/post-20.webp', alt: '개인 카페 비교 게시물 20' },",
+            "  { id: 'P3-21', group: 'V3', image: '/step3/post-21.webp', fallback: '/step3/post-21.webp', alt: '개인 카페 비교 게시물 21' },",
           ].join('\n');
 
           next = next.replace(
@@ -40,8 +59,7 @@ function mocaSurveyAdjustments() {
           );
         }
 
-        // Step 3-2 groups: menu appeal / manufacturing & expertise / space appeal.
-        // Each stage now has its original three images plus the newly supplied one.
+        // Step 3-2: keep the three additional images in their intended comparison stages.
         next = next
           .replace(
             "{ id: 'V1', postIds: ['P3-01', 'P3-02', 'P3-03'] },",
@@ -56,12 +74,12 @@ function mocaSurveyAdjustments() {
             "{ id: 'V3', postIds: ['P3-04', 'P3-05', 'P3-06', 'P3-21'] },",
           );
 
-        // Randomize only the first Instagram feed. The comparison stages keep
-        // their intentional stage-specific groupings.
+        // Step 3-1: every one of the original 18 posts appears exactly once;
+        // Fisher-Yates changes only their order each time this screen mounts.
         if (!next.includes('function shuffleStep3Posts(posts)')) {
           next = next.replace(
             'function Step3Rank({ rankings, onChange, onNext, onBack }) {',
-            `function shuffleStep3Posts(posts) {\n  const shuffled = [...posts];\n  for (let index = shuffled.length - 1; index > 0; index -= 1) {\n    const randomIndex = Math.floor(Math.random() * (index + 1));\n    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];\n  }\n  return shuffled;\n}\n\nfunction Step3Rank({ rankings, onChange, onNext, onBack }) {\n  const rankPosts = useMemo(() => shuffleStep3Posts(STEP3_POSTS), []);`,
+            `function shuffleStep3Posts(posts) {\n  const shuffled = [...posts];\n  for (let index = shuffled.length - 1; index > 0; index -= 1) {\n    const randomIndex = Math.floor(Math.random() * (index + 1));\n    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];\n  }\n  return shuffled;\n}\n\nfunction Step3Rank({ rankings, onChange, onNext, onBack }) {\n  const rankPosts = useMemo(() => shuffleStep3Posts(STEP3_POSTS.slice(0, 18)), []);`,
           );
           next = next.replace('{STEP3_POSTS.map((post) => {', '{rankPosts.map((post) => {');
         }
@@ -94,10 +112,10 @@ function mocaSurveyAdjustments() {
           .replace('aria-label="카페 추천 게시물 선택"', 'aria-label="개인 카페 추천 게시물 선택"');
 
         if (!next.includes("id: 'P3-19'") || !next.includes("'P3-19']") || !next.includes("'P3-20']") || !next.includes("'P3-21']")) {
-          this.error('CAFE MOCA Step 3 image injection failed because App.jsx structure changed.');
+          this.error('CAFE MOCA Step 3 comparison image injection failed because App.jsx structure changed.');
         }
-        if (!next.includes('rankPosts.map((post) => {')) {
-          this.error('CAFE MOCA Step 3 randomization injection failed because App.jsx structure changed.');
+        if (!next.includes('STEP3_POSTS.slice(0, 18)') || !next.includes('rankPosts.map((post) => {')) {
+          this.error('CAFE MOCA Step 3 exact-18 random-order injection failed because App.jsx structure changed.');
         }
 
         return { code: next, map: null };
