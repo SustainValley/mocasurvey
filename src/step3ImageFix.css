@@ -2,69 +2,14 @@
    Final override loaded after styles.css.
    - Keep the tall Instagram-style 2-column tile ratio.
    - Every image fills the tile with cover.
-   - PNG captures get a very small overscan so baked-in export edges do not make them look smaller than JPEGs.
+   - Figma-exported PNGs contain large white canvases around the actual post,
+     so each affected PNG gets a measured zoom to crop that canvas away.
 */
 
-.instagram-explore-grid {
-  display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 1px !important;
-  width: 100% !important;
-  padding: 0 0 94px !important;
-  background: #fff !important;
-  align-items: stretch !important;
-}
-
-.instagram-explore-grid .instagram-post-card {
-  position: relative !important;
-  display: block !important;
-  width: 100% !important;
-  min-width: 0 !important;
-  height: auto !important;
-  aspect-ratio: 187.5 / 246 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  outline: 0 !important;
-  box-shadow: none !important;
-  overflow: hidden !important;
-  background: #eee !important;
-}
-
-.instagram-explore-grid .instagram-post-card > img {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  min-width: 100% !important;
-  min-height: 100% !important;
-  max-width: none !important;
-  max-height: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  display: block !important;
-  object-fit: cover !important;
-  object-position: 50% 50% !important;
-  transform: none !important;
-  transform-origin: center center !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  outline: 0 !important;
-  box-shadow: none !important;
-}
-
-/* PNG exports can contain a light frame / extra canvas even though the bitmap itself is valid.
-   Overscan them slightly so they visually fill the tile like the JPEG posts. */
-.instagram-explore-grid .instagram-post-card > img[src$=".png"],
-.instagram-explore-grid .instagram-post-card > img[src*=".png?"] {
-  transform: scale(1.06) !important;
-}
-
+.instagram-explore-grid,
 .instagram-compare-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  grid-auto-rows: auto !important;
   gap: 1px !important;
   width: 100% !important;
   padding: 0 0 94px !important;
@@ -72,6 +17,7 @@
   align-items: stretch !important;
 }
 
+.instagram-explore-grid .instagram-post-card,
 .instagram-compare-grid .instagram-compare-card {
   position: relative !important;
   display: block !important;
@@ -89,6 +35,7 @@
   background: #eee !important;
 }
 
+.instagram-explore-grid .instagram-post-card > img,
 .instagram-compare-grid .instagram-compare-card > img {
   position: absolute !important;
   inset: 0 !important;
@@ -111,10 +58,34 @@
   box-shadow: none !important;
 }
 
-.instagram-compare-grid .instagram-compare-card > img[src$=".png"],
-.instagram-compare-grid .instagram-compare-card > img[src*=".png?"] {
-  transform: scale(1.06) !important;
-}
+/*
+  These PNGs were exported from Figma with roughly 256px of white canvas
+  around the real post. A generic 1.06 zoom is far too small, so use the
+  measured crop ratio for each file. This changes display only; image files
+  are not recompressed or resized.
+*/
+.instagram-step3 img[src*="post-01.png"],
+.instagram-step3 img[src*="post-02.png"] { transform: scale(1.57) !important; }
+.instagram-step3 img[src*="post-03.png"] { transform: scale(1.56) !important; }
+.instagram-step3 img[src*="post-05.png"],
+.instagram-step3 img[src*="post-07.png"] { transform: scale(2.32) !important; }
+.instagram-step3 img[src*="post-06.png"],
+.instagram-step3 img[src*="post-09.png"],
+.instagram-step3 img[src*="post-10.png"],
+.instagram-step3 img[src*="post-22.png"],
+.instagram-step3 img[src*="post-23.png"] { transform: scale(1.57) !important; }
+.instagram-step3 img[src*="post-11.png"],
+.instagram-step3 img[src*="post-13.png"] { transform: scale(1.60) !important; }
+.instagram-step3 img[src*="post-14.png"] { transform: scale(1.94) !important; }
+.instagram-step3 img[src*="post-15.png"] { transform: scale(1.55) !important; }
+.instagram-step3 img[src*="post-17.png"] { transform: scale(1.82) !important; }
+.instagram-step3 img[src*="post-18.png"] { transform: scale(1.94) !important; }
+.instagram-step3 img[src*="post-19.png"] { transform: scale(1.90) !important; }
+.instagram-step3 img[src*="post-21.png"] { transform: scale(1.77) !important; }
+
+/* post-20.png and post-24.png already have no export canvas, so leave them at cover. */
+.instagram-step3 img[src*="post-20.png"],
+.instagram-step3 img[src*="post-24.png"] { transform: none !important; }
 
 @media (max-width: 374px) {
   .instagram-explore-grid .instagram-post-card,
