@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App.jsx';
 import './styles.css';
 import './step3Fix.css';
+import './step3ImageFix.css';
 import './offlineParticipationCopy.js';
 import './runtimeAnalytics.js';
 createRoot(document.getElementById('root')).render(<App />);
