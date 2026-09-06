@@ -1,0 +1,46 @@
+/* Step 3 transition layout fix — keep the loading copy and module from overlapping. */
+.step3-loading-screen .design-canvas{
+  height:812px;
+}
+
+.step3-loading-copy{
+  top:188px !important;
+}
+
+.step3-loading-copy p{
+  margin-bottom:11px !important;
+}
+
+.step3-loading-copy h2{
+  font-size:30px !important;
+  line-height:1.14 !important;
+  letter-spacing:-1.05px !important;
+}
+
+.step3-loading-copy span{
+  margin-top:14px !important;
+  font-size:11px !important;
+  line-height:17px !important;
+}
+
+.step3-loading-module{
+  top:438px !important;
+}
+
+@media (max-width:374px){
+  .step3-loading-copy{
+    left:16px !important;
+    width:calc(100% - 32px) !important;
+    top:184px !important;
+  }
+
+  .step3-loading-copy h2{
+    font-size:28px !important;
+  }
+
+  .step3-loading-module{
+    left:16px !important;
+    width:calc(100% - 32px) !important;
+    top:440px !important;
+  }
+}
