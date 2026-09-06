@@ -1,0 +1,109 @@
+/* Step 3 Instagram feed image normalization
+   Final override loaded after styles.css.
+   - Every feed card has the same Instagram-style aspect ratio.
+   - Every image fills its card with center-crop.
+   - No legacy scale/rounded-frame styling is allowed through.
+*/
+
+.instagram-explore-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 1px !important;
+  width: 100% !important;
+  padding: 0 0 94px !important;
+  background: #fff !important;
+  align-items: stretch !important;
+}
+
+.instagram-explore-grid .instagram-post-card {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  aspect-ratio: 187.5 / 246 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  background: #eee !important;
+}
+
+.instagram-explore-grid .instagram-post-card > img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: 50% 50% !important;
+  transform: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+.instagram-compare-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-auto-rows: 246px !important;
+  gap: 1px !important;
+  width: 100% !important;
+  padding: 0 0 94px !important;
+  background: #fff !important;
+}
+
+.instagram-compare-grid .instagram-compare-card {
+  position: relative !important;
+  width: 100% !important;
+  height: 246px !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  background: #eee !important;
+}
+
+.instagram-compare-grid .instagram-compare-card > img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: 50% 50% !important;
+  transform: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 374px) {
+  .instagram-compare-grid {
+    grid-auto-rows: calc((100vw / 2) * 1.312) !important;
+  }
+  .instagram-compare-grid .instagram-compare-card {
+    height: calc((100vw / 2) * 1.312) !important;
+  }
+}
