@@ -27,7 +27,7 @@ function mocaSurveyAdjustments() {
           '/step3/post-13.png',
           '/step3/post-14.png',
           '/step3/post-15.png',
-          '/step3/post-16.png',
+          '/step3/post-16.jpeg',
           '/step3/post-17.png',
           '/step3/post-18.png',
           '/step3/post-19.png',
