@@ -1,6 +1,8 @@
 /* Step 3 Instagram image normalization
    Final override loaded after styles.css.
-   All feed / comparison images use the exact same tile size.
+   - Keep the tall Instagram-style 2-column tile ratio.
+   - Every image fills the tile with cover.
+   - PNG captures get a very small overscan so baked-in export edges do not make them look smaller than JPEGs.
 */
 
 .instagram-explore-grid {
@@ -19,7 +21,7 @@
   width: 100% !important;
   min-width: 0 !important;
   height: auto !important;
-  aspect-ratio: 1 / 1 !important;
+  aspect-ratio: 187.5 / 246 !important;
   padding: 0 !important;
   margin: 0 !important;
   border: 0 !important;
@@ -45,10 +47,18 @@
   object-fit: cover !important;
   object-position: 50% 50% !important;
   transform: none !important;
+  transform-origin: center center !important;
   border: 0 !important;
   border-radius: 0 !important;
   outline: 0 !important;
   box-shadow: none !important;
+}
+
+/* PNG exports can contain a light frame / extra canvas even though the bitmap itself is valid.
+   Overscan them slightly so they visually fill the tile like the JPEG posts. */
+.instagram-explore-grid .instagram-post-card > img[src$=".png"],
+.instagram-explore-grid .instagram-post-card > img[src*=".png?"] {
+  transform: scale(1.06) !important;
 }
 
 .instagram-compare-grid {
@@ -68,7 +78,7 @@
   width: 100% !important;
   min-width: 0 !important;
   height: auto !important;
-  aspect-ratio: 1 / 1 !important;
+  aspect-ratio: 187.5 / 246 !important;
   padding: 0 !important;
   margin: 0 !important;
   border: 0 !important;
@@ -94,8 +104,21 @@
   object-fit: cover !important;
   object-position: 50% 50% !important;
   transform: none !important;
+  transform-origin: center center !important;
   border: 0 !important;
   border-radius: 0 !important;
   outline: 0 !important;
   box-shadow: none !important;
+}
+
+.instagram-compare-grid .instagram-compare-card > img[src$=".png"],
+.instagram-compare-grid .instagram-compare-card > img[src*=".png?"] {
+  transform: scale(1.06) !important;
+}
+
+@media (max-width: 374px) {
+  .instagram-explore-grid .instagram-post-card,
+  .instagram-compare-grid .instagram-compare-card {
+    aspect-ratio: 187.5 / 246 !important;
+  }
 }
