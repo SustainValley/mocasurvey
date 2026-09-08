@@ -169,35 +169,52 @@ function MobileId({ onSelected, isReading, progress, error }) {
   );
 }
 
-function ReviewField({ label, value, onChange }) {
-  const [editing, setEditing] = useState(false);
+function ReviewField({ label, value, onChange, inputMode }) {
   return (
     <div className="review-field-wrap">
       <label>{label}</label>
-      <div className={`review-field ${editing ? 'is-editing' : ''}`}>
-        <input value={value} placeholder="인식하지 못했어요" readOnly={!editing} onChange={(e) => onChange(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') setEditing(false); }} />
-        <button type="button" onClick={() => setEditing((v) => !v)}>{editing ? '완료' : '수정'}</button>
+      <div className="review-field is-editing">
+        <input
+          value={value}
+          placeholder={`${label}을 입력해주세요`}
+          inputMode={inputMode}
+          onChange={(e) => onChange(e.target.value)}
+        />
       </div>
     </div>
   );
 }
 
-function OcrReview({ initialData, onBack, onNext, busy = false, serverError = '' }) {
-  const [data, setData] = useState(initialData);
-  const update = (key) => (value) => setData((prev) => ({ ...prev, [key]: value }));
-  const missing = !data.name || !data.studentId || !data.department;
+function OcrReview({ initialData, onNext, busy = false, serverError = '' }) {
+  const [data, setData] = useState(initialData || { name: '', studentId: '', department: '', rawText: '' });
+  const update = (key) => (value) => setData((prev) => ({
+    ...prev,
+    [key]: key === 'studentId' ? value.replace(/[^0-9]/g, '') : value,
+  }));
+  const normalized = {
+    ...data,
+    name: (data.name || '').trim(),
+    studentId: (data.studentId || '').trim(),
+    department: (data.department || '').trim(),
+  };
+  const missing = !normalized.name || !normalized.studentId || !normalized.department;
+
   return (
     <Screen className="review-screen">
-      <section className="review-head"><h2>정보를 확인해주세요</h2><p>열람증에서 읽은 정보예요. 틀린 부분만 수정해주세요.</p></section>
+      <section className="review-head">
+        <h2>정보를 입력해주세요</h2>
+        <p>학번, 이름, 소속을 입력하면 바로 설문을 시작할 수 있어요.</p>
+      </section>
       <div className="review-form">
-        <ReviewField label="이름" value={data.name} onChange={update('name')} />
-        <ReviewField label="학번" value={data.studentId} onChange={update('studentId')} />
-        <ReviewField label="소속" value={data.department} onChange={update('department')} />
+        <ReviewField label="학번" value={data.studentId || ''} onChange={update('studentId')} inputMode="numeric" />
+        <ReviewField label="이름" value={data.name || ''} onChange={update('name')} />
+        <ReviewField label="소속" value={data.department || ''} onChange={update('department')} />
         <p className="unique-note">※ 학번 기준으로 온라인 설문은 한 번만 참여할 수 있어요.</p>
-        {missing && <button className="retry-ocr" type="button" onClick={onBack}>이미지 다시 선택하기</button>}
         {serverError && <p className="ocr-error">{serverError}</p>}
       </div>
-      <button className="review-cta" type="button" disabled={missing || busy} onClick={() => onNext(data)}>{busy ? '참여 기록 확인 중...' : <>확인하고 설문 시작하기&nbsp;&nbsp;→</>}</button>
+      <button className="review-cta" type="button" disabled={missing || busy} onClick={() => onNext(normalized)}>
+        {busy ? '참여 기록 확인 중...' : <>설문 시작하기&nbsp;&nbsp;→</>}
+      </button>
       <Logo />
     </Screen>
   );
@@ -1109,9 +1126,8 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      {page === 'start' && <Start onNext={() => setPage('upload')} />}
-      {page === 'upload' && <MobileId onSelected={handleSelected} isReading={isReading} progress={progress} error={ocrError} />}
-      {page === 'review' && <OcrReview initialData={ocrData} onBack={() => setPage('upload')} onNext={beginSurveyOrRestore} busy={isClaiming} serverError={serverError} />}
+      {page === 'start' && <Start onNext={() => setPage('review')} />}
+      {(page === 'upload' || page === 'review') && <OcrReview initialData={ocrData} onNext={beginSurveyOrRestore} busy={isClaiming} serverError={serverError} />}
       {page === 'part1' && <SurveyQuestionScreen part={1} index={part1Index} answer={part1Answers[part1Index]} onSelect={selectPart1} onBack={part1Index > 0 ? () => { setPart1Index((i) => i - 1); setQuestionStartedAt(Date.now()); } : null} />}
       {page === 'part2' && <SurveyQuestionScreen part={2} index={part2Index} answer={part2Answers[part2Index]} onSelect={selectPart2} onBack={() => { if (part2Index > 0) setPart2Index((i) => i - 1); else { setPage('part1'); setPart1Index(PART1_QUESTIONS.length - 1); } setQuestionStartedAt(Date.now()); }} />}
       {page === 'compare' && comparison && <CompareScreen mode={comparison.mode} types={comparison.candidates} index={compareIndex} value={compareAnswers[compareIndex]} onSelect={selectCompare} onBack={() => { if (compareIndex > 0) setCompareIndex((i) => i - 1); else { setPage('part2'); setPart2Index(PART2_QUESTIONS.length - 1); } setQuestionStartedAt(Date.now()); }} />}
