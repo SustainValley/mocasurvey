@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { recognizeMobileId } from './ocr';
 import { PART1_QUESTIONS, PART2_QUESTIONS, COMPARE_PROMPTS, FINAL_TIE_PROMPT, TYPE_META, RESULT_META } from './surveyData';
 import { claimStudentSurvey, completeStudentSurvey, saveSurveyProgress } from './surveyStore';
 import { isSupabaseConfigured } from './supabase';
@@ -18,24 +17,24 @@ const TYPE_COLORS = {
 const STEP3_POSTS = [
   // Step 3 content stimuli sourced from FigJam: "카페 콘텐츠 유형별 사진 수집".
   // V labels are internal research keys only and are never rendered to participants.
-  { id: 'P3-01', group: 'V1', image: 'https://www.figma.com/api/mcp/asset/0700e658-b977-48f1-89b3-202de459933e.png', fallback: '/step3/post-01.jpg', alt: '카페 추천 게시물 1' },
-  { id: 'P3-02', group: 'V1', image: 'https://www.figma.com/api/mcp/asset/65fac3d4-c8f8-4033-8384-356bbea2ce9c.png', fallback: '/step3/post-02.jpg', alt: '카페 추천 게시물 2' },
-  { id: 'P3-03', group: 'V1', image: 'https://www.figma.com/api/mcp/asset/c9e278e7-b1a2-4042-8b78-7dfe07ee33b3.png', fallback: '/step3/post-03.jpg', alt: '카페 추천 게시물 3' },
-  { id: 'P3-04', group: 'V2', image: 'https://www.figma.com/api/mcp/asset/83d64078-1dfb-45d8-b398-373e42d1c614.png', fallback: '/step3/post-04.jpg', alt: '카페 추천 게시물 4' },
-  { id: 'P3-05', group: 'V2', image: 'https://www.figma.com/api/mcp/asset/d405ddc9-9304-4285-9a2b-68d147b1f12b.png', fallback: '/step3/post-05.jpg', alt: '카페 추천 게시물 5' },
-  { id: 'P3-06', group: 'V2', image: 'https://www.figma.com/api/mcp/asset/9104fe10-9b96-463e-a746-238bcbbcbb68.png', fallback: '/step3/post-06.jpg', alt: '카페 추천 게시물 6' },
-  { id: 'P3-07', group: 'V3', image: 'https://www.figma.com/api/mcp/asset/205f2ed7-92b4-4198-81d1-0416fd8f5262.png', fallback: '/step3/post-07.jpg', alt: '카페 추천 게시물 7' },
-  { id: 'P3-08', group: 'V3', image: 'https://www.figma.com/api/mcp/asset/1ea66a8f-cf98-4127-ba95-d329c28f7aea.png', fallback: '/step3/post-08.jpg', alt: '카페 추천 게시물 8' },
-  { id: 'P3-09', group: 'V3', image: 'https://www.figma.com/api/mcp/asset/23c8c627-549f-4bd9-bf86-7038a4370024.png', fallback: '/step3/post-09.jpg', alt: '카페 추천 게시물 9' },
-  { id: 'P3-10', group: 'V4', image: 'https://www.figma.com/api/mcp/asset/b0a424d3-adc9-4cd2-b24c-381cfe2d8787.png', fallback: '/step3/post-10.jpg', alt: '카페 추천 게시물 10' },
-  { id: 'P3-11', group: 'V4', image: 'https://www.figma.com/api/mcp/asset/a0be566c-308c-448e-98c8-eeaa5eddec35.png', fallback: '/step3/post-11.jpg', alt: '카페 추천 게시물 11' },
-  { id: 'P3-12', group: 'V4', image: 'https://www.figma.com/api/mcp/asset/32ee4b3d-d7e8-4b9c-814f-a5ac05710555.png', fallback: '/step3/post-12.jpg', alt: '카페 추천 게시물 12' },
-  { id: 'P3-13', group: 'V5', image: 'https://www.figma.com/api/mcp/asset/36da938d-e32f-40f5-a749-7588d4a0fb2f.png', fallback: '/step3/post-13.jpg', alt: '카페 추천 게시물 13' },
-  { id: 'P3-14', group: 'V5', image: 'https://www.figma.com/api/mcp/asset/ec11462a-6709-4d21-a077-1bc03ff3bb0d.png', fallback: '/step3/post-14.jpg', alt: '카페 추천 게시물 14' },
-  { id: 'P3-15', group: 'V5', image: 'https://www.figma.com/api/mcp/asset/b2e9832c-9fd8-40c6-9f15-f7a75ad2b628.png', fallback: '/step3/post-15.jpg', alt: '카페 추천 게시물 15' },
-  { id: 'P3-16', group: 'V6', image: 'https://www.figma.com/api/mcp/asset/61723ac0-d94c-4c18-a7aa-483889681c79.png', fallback: '/step3/post-16.jpg', alt: '카페 추천 게시물 16' },
-  { id: 'P3-17', group: 'V6', image: 'https://www.figma.com/api/mcp/asset/c010c5bb-14cc-4427-a023-0ea3e9c7a539.png', fallback: '/step3/post-17.jpg', alt: '카페 추천 게시물 17' },
-  { id: 'P3-18', group: 'V6', image: 'https://www.figma.com/api/mcp/asset/a991105c-dcd4-4dc8-9bad-495b46d7e4de.png', fallback: '/step3/post-18.jpg', alt: '카페 추천 게시물 18' },
+  { id: 'P3-01', group: 'V1', image: '/step3-optimized/post-01.webp', fallback: '/step3/post-01.png', alt: '카페 추천 게시물 1' },
+  { id: 'P3-02', group: 'V1', image: '/step3-optimized/post-02.webp', fallback: '/step3/post-02.png', alt: '카페 추천 게시물 2' },
+  { id: 'P3-03', group: 'V1', image: '/step3-optimized/post-03.webp', fallback: '/step3/post-03.png', alt: '카페 추천 게시물 3' },
+  { id: 'P3-04', group: 'V2', image: '/step3-optimized/post-04.webp', fallback: '/step3/post-04.jpeg', alt: '카페 추천 게시물 4' },
+  { id: 'P3-05', group: 'V2', image: '/step3-optimized/post-05.webp', fallback: '/step3/post-05.png', alt: '카페 추천 게시물 5' },
+  { id: 'P3-06', group: 'V2', image: '/step3-optimized/post-06.webp', fallback: '/step3/post-06.png', alt: '카페 추천 게시물 6' },
+  { id: 'P3-07', group: 'V3', image: '/step3-optimized/post-07.webp', fallback: '/step3/post-07.png', alt: '카페 추천 게시물 7' },
+  { id: 'P3-08', group: 'V3', image: '/step3-optimized/post-08.webp', fallback: '/step3/post-08.jpeg', alt: '카페 추천 게시물 8' },
+  { id: 'P3-09', group: 'V3', image: '/step3-optimized/post-09.webp', fallback: '/step3/post-09.png', alt: '카페 추천 게시물 9' },
+  { id: 'P3-10', group: 'V4', image: '/step3-optimized/post-10.webp', fallback: '/step3/post-10.png', alt: '카페 추천 게시물 10' },
+  { id: 'P3-11', group: 'V4', image: '/step3-optimized/post-11.webp', fallback: '/step3/post-11.png', alt: '카페 추천 게시물 11' },
+  { id: 'P3-12', group: 'V4', image: '/step3-optimized/post-12.webp', fallback: '/step3/post-12.jpeg', alt: '카페 추천 게시물 12' },
+  { id: 'P3-13', group: 'V5', image: '/step3-optimized/post-13.webp', fallback: '/step3/post-13.png', alt: '카페 추천 게시물 13' },
+  { id: 'P3-14', group: 'V5', image: '/step3-optimized/post-14.webp', fallback: '/step3/post-14.png', alt: '카페 추천 게시물 14' },
+  { id: 'P3-15', group: 'V5', image: '/step3-optimized/post-15.webp', fallback: '/step3/post-15.png', alt: '카페 추천 게시물 15' },
+  { id: 'P3-16', group: 'V6', image: '/step3-optimized/post-16.webp', fallback: '/step3/post-16.jpeg', alt: '카페 추천 게시물 16' },
+  { id: 'P3-17', group: 'V6', image: '/step3-optimized/post-17.webp', fallback: '/step3/post-17.png', alt: '카페 추천 게시물 17' },
+  { id: 'P3-18', group: 'V6', image: '/step3-optimized/post-18.webp', fallback: '/step3/post-18.png', alt: '카페 추천 게시물 18' },
 ];
 
 const STEP3_STRUCTURE_GROUPS = [
@@ -51,6 +50,7 @@ function getStep3Post(postId) {
 const SESSION_KEY = 'moca-survey-session-v4';
 const AUTH_KEY = 'moca-survey-auth-v1';
 const COMPLETED_KEY = 'moca-survey-completed-v1';
+const SESSION_TTL_MS = 12 * 60 * 60 * 1000;
 
 function readJson(key, fallback) {
   try {
@@ -129,42 +129,6 @@ function Start({ onNext }) {
       </section>
       <button className="start-btn" onClick={onNext}>시작하기</button>
       <Logo />
-    </Screen>
-  );
-}
-
-function MobileId({ onSelected, isReading, progress, error }) {
-  const input = useRef(null);
-  const handleFile = (event) => {
-    const file = event.target.files?.[0];
-    if (file) onSelected(file);
-    event.target.value = '';
-  };
-
-  return (
-    <Screen className="upload-screen">
-      <section className="upload-head">
-        <h2>모바일 열람증을<br />올려주세요</h2>
-        <p>아래 예시처럼 화면 전체가 보이게 캡처해주세요.</p>
-      </section>
-      <div className="note"><span /><p>서울여대 도서관 앱 &gt; 모바일 열람증에서<br />바로 캡처할 수 있어요.</p></div>
-      <div className="id-card" aria-label="모바일 열람증 예시">
-        <div className="id-card-title"><span className="home-icon"><i /><b /></span>모바일 열람증</div>
-        <div className="red-rule" /><div className="timer">24초 남았습니다.</div>
-        <div className="photo"><div className="head" /><div className="body" /></div>
-        <div className="qr">QR</div><div className="redacts"><i /><i /><i /></div><div className="yellow">열람증 발급</div>
-      </div>
-      <button className="upload-btn" disabled={isReading} onClick={() => input.current?.click()}>
-        {isReading ? `이미지 읽는 중... ${progress}%` : '모바일 열람증 이미지 선택하기  ↑'}
-      </button>
-      <input ref={input} type="file" accept="image/png,image/jpeg,image/webp,image/heic,image/heif" hidden onChange={handleFile} />
-      {error ? <p className="ocr-error">{error}</p> : <p className="privacy">확인 후 이미지는 저장하지 않아요.</p>}
-      <Logo />
-      {isReading && (
-        <div className="ocr-overlay" role="status" aria-live="polite">
-          <div className="ocr-loader"><strong>열람증 정보를 읽고 있어요</strong><span>이름 · 학번 · 소속을 확인하는 중이에요.</span><div className="ocr-progress"><i style={{ width: `${progress}%` }} /></div><b>{progress}%</b></div>
-        </div>
-      )}
     </Screen>
   );
 }
@@ -359,7 +323,7 @@ function Step3Rank({ rankings, onChange, onNext, onBack }) {
           const rankIndex = rankings.indexOf(post.id);
           return (
             <button key={post.id} type="button" className={`instagram-post-card ${rankIndex >= 0 ? 'is-ranked' : ''}`} onClick={() => toggle(post.id)} aria-label={`${post.alt}${rankIndex >= 0 ? `, ${rankIndex + 1}순위` : ''}`}>
-              <img src={post.image} alt={post.alt} onError={(event) => { if (post.fallback && event.currentTarget.src !== `${window.location.origin}${post.fallback}`) event.currentTarget.src = post.fallback; }} />
+              <img src={post.image} alt={post.alt} loading="lazy" decoding="async" onError={(event) => { if (post.fallback && event.currentTarget.src !== `${window.location.origin}${post.fallback}`) event.currentTarget.src = post.fallback; }} />
               {rankIndex >= 0 && <span className="instagram-rank-badge">{rankIndex + 1}</span>}
             </button>
           );
@@ -374,8 +338,8 @@ function Step3TaskModal({ rankings, onStart, onBack }) {
   return (
     <InstagramChrome className="step3-modal-screen" onBack={onBack}>
       <section className="instagram-explore-grid is-dimmed" aria-hidden="true">
-        {[...visiblePosts, ...STEP3_POSTS].slice(0, 10).map((post, index) => (
-          <div key={`${post.id}-${index}`} className="instagram-post-card"><img src={post.image} alt="" onError={(event) => { if (post.fallback) event.currentTarget.src = post.fallback; }} /></div>
+        {[...visiblePosts, ...STEP3_POSTS].slice(0, 6).map((post, index) => (
+          <div key={`${post.id}-${index}`} className="instagram-post-card"><img src={post.image} alt="" loading="lazy" decoding="async" onError={(event) => { if (post.fallback) event.currentTarget.src = post.fallback; }} /></div>
         ))}
       </section>
       <div className="step3-modal-dim" />
@@ -414,7 +378,7 @@ function Step3Compare({ index, choices, onSelect, onBack }) {
             onClick={() => onSelect(group.id, post.id, false)}
             aria-pressed={selectedId === post.id}
           >
-            <img src={post.image} alt={post.alt} onError={(event) => { if (post.fallback && event.currentTarget.src !== `${window.location.origin}${post.fallback}`) event.currentTarget.src = post.fallback; }} />
+            <img src={post.image} alt={post.alt} loading="lazy" decoding="async" onError={(event) => { if (post.fallback && event.currentTarget.src !== `${window.location.origin}${post.fallback}`) event.currentTarget.src = post.fallback; }} />
             {selectedId === post.id && <span className="instagram-check-badge">✓</span>}
           </button>
         ))}
@@ -590,26 +554,30 @@ async function saveShareCard(primary, meta, topThree, accent) {
 }
 
 function ResultScreen({ result, scores, onRestart, onOfflineGuide }) {
-  const actualPrimary = TYPE_META[result.primaryType];
-  const actualSecondary = TYPE_META[result.secondaryType];
+  const safePrimaryType = TYPE_META[result?.primaryType] && RESULT_META[result?.primaryType] ? result.primaryType : 'archive';
+  const safeSecondaryType = TYPE_META[result?.secondaryType]
+    ? result.secondaryType
+    : (TYPE_ORDER.find((type) => type !== safePrimaryType) || 'expert');
+  const actualPrimary = TYPE_META[safePrimaryType];
+  const actualSecondary = TYPE_META[safeSecondaryType];
   const [browseType, setBrowseType] = useState('');
   const [saving, setSaving] = useState(false);
-  const displayType = browseType || result.primaryType;
-  const isOwnResult = displayType === result.primaryType;
+  const displayType = (browseType && TYPE_META[browseType] && RESULT_META[browseType]) ? browseType : safePrimaryType;
+  const isOwnResult = displayType === safePrimaryType;
   const displayPrimary = TYPE_META[displayType];
   const displayMeta = RESULT_META[displayType];
-  const accent = TYPE_COLORS[displayType];
+  const accent = TYPE_COLORS[displayType] || TYPE_COLORS.archive;
   const ranked = TYPE_ORDER.map((type) => ({ type, score: scores[type] || 0 }))
     .sort((a, b) => b.score - a.score || TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type));
   const topThreeBase = ranked.slice(0, 3);
   const maxScore = Math.max(1, topThreeBase[0]?.score || 1);
   const topThree = topThreeBase.map((item) => ({ ...item, percent: Math.round((item.score / maxScore) * 100) }));
-  const otherTypes = TYPE_ORDER.filter((type) => type !== result.primaryType);
+  const otherTypes = TYPE_ORDER.filter((type) => type !== safePrimaryType);
 
   const handleSave = async () => {
     if (saving || !isOwnResult) return;
     setSaving(true);
-    try { await saveShareCard(actualPrimary, RESULT_META[result.primaryType], topThree, TYPE_COLORS[result.primaryType]); }
+    try { await saveShareCard(actualPrimary, RESULT_META[safePrimaryType], topThree, TYPE_COLORS[safePrimaryType]); }
     catch (error) { console.error(error); window.alert('이미지 저장 중 오류가 발생했어요. 다시 시도해주세요.'); }
     finally { setSaving(false); }
   };
@@ -663,7 +631,7 @@ function ResultScreen({ result, scores, onRestart, onOfflineGuide }) {
 
         <div className={`result-secondary-card ${!isOwnResult ? 'is-preview-card' : ''}`}>
           {isOwnResult ? (
-            <><span>보조 유형&nbsp;&nbsp;·&nbsp;&nbsp;{actualSecondary.name}</span><b>{RESULT_META[result.primaryType].secondaryCopy}</b></>
+            <><span>보조 유형&nbsp;&nbsp;·&nbsp;&nbsp;{actualSecondary.name}</span><b>{RESULT_META[safePrimaryType].secondaryCopy}</b></>
           ) : (
             <><span>다른 유형 둘러보는 중</span><b>내 실제 결과는 {actualPrimary.name}이에요. 이 화면은 유형 특징만 확인하는 미리보기예요.</b></>
           )}
@@ -804,29 +772,41 @@ function decideFromComparison(mode, candidates, compareAnswers, baseScores) {
 
 export default function App() {
   const initialState = useMemo(() => {
-    // Supabase가 연결된 배포 환경에서는 localStorage를 로그인 근거로 사용하지 않습니다.
-    // Safari에 예전 값이 남아 있어도 사용자가 다시 학번/이름을 확인하면 서버 기록을 기준으로 판정합니다.
+    const storedSession = loadSession();
+    const storedAuth = loadAuth();
+    const updatedAt = Number(storedSession?.updatedAt || 0);
+    const isFreshSession = Boolean(updatedAt && Date.now() - updatedAt >= 0 && Date.now() - updatedAt < SESSION_TTL_MS);
+    const verified = storedSession?.verifiedUser || storedAuth || null;
+    const restorablePages = new Set([
+      'part1', 'part2', 'compare', 'finalTie',
+      'step3Loading', 'step3Rank', 'step3Modal', 'step3Compare',
+      'resultLoading', 'result', 'already', 'offlineGuide',
+    ]);
+
+    if (isFreshSession && verified?.studentId && restorablePages.has(storedSession?.page)) {
+      let restoredPage = storedSession.page;
+      const needsResult = ['step3Loading', 'step3Rank', 'step3Modal', 'step3Compare', 'resultLoading', 'result', 'offlineGuide'];
+      if (needsResult.includes(restoredPage) && !storedSession.result) restoredPage = 'part2';
+      if (restoredPage === 'already' && !storedSession.existingRecord?.result) restoredPage = storedSession.result ? 'result' : 'part1';
+      return { session: storedSession, auth: verified, completed: storedSession.existingRecord || null, restoredPage };
+    }
+
     if (isSupabaseConfigured) {
       return { session: null, auth: null, completed: null, restoredPage: 'start' };
     }
 
-    // Supabase 미설정 로컬 개발에서만 기존 로컬 복원을 허용합니다.
-    const session = loadSession();
-    const auth = loadAuth();
-    const verified = session?.verifiedUser || auth || null;
-    const completed = verified?.studentId ? getCompletedRecord(verified.studentId) : null;
+    const session = isFreshSession ? storedSession : null;
+    const auth = session?.verifiedUser || storedAuth || null;
+    const completed = auth?.studentId ? getCompletedRecord(auth.studentId) : null;
     let restoredPage = session?.page || 'start';
     if (completed?.result && (!session || restoredPage === 'start' || restoredPage === 'upload' || restoredPage === 'review')) restoredPage = 'already';
-    else if (verified && (!session || restoredPage === 'start' || restoredPage === 'upload' || restoredPage === 'review')) restoredPage = 'part1';
-    return { session, auth: verified, completed, restoredPage };
+    else if (auth && (!session || restoredPage === 'start' || restoredPage === 'upload' || restoredPage === 'review')) restoredPage = 'part1';
+    return { session, auth, completed, restoredPage };
   }, []);
   const initialSession = initialState.session;
   const [page, setPage] = useState(initialState.restoredPage);
   const [ocrData, setOcrData] = useState(initialSession?.ocrData || initialState.auth || { name: '', studentId: '', department: '', rawText: '' });
   const [verifiedUser, setVerifiedUser] = useState(initialState.auth || null);
-  const [isReading, setIsReading] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [ocrError, setOcrError] = useState('');
   const [part1Index, setPart1Index] = useState(initialSession?.part1Index || 0);
   const [part2Index, setPart2Index] = useState(initialSession?.part2Index || 0);
   const [part1Answers, setPart1Answers] = useState(initialSession?.part1Answers || Array(PART1_QUESTIONS.length).fill(null));
@@ -847,13 +827,37 @@ export default function App() {
 
   const scores = useMemo(() => calculateScores(part2Answers), [part2Answers]);
 
-  useEffect(() => {
-    const safePage = page === 'upload' && isReading ? 'upload' : page;
+
+  const persistRecoveryCheckpoint = (nextPage, overrides = {}) => {
     writeJson(SESSION_KEY, {
-      page: safePage, ocrData, verifiedUser, part1Index, part2Index, part1Answers, part2Answers,
-      comparison, compareIndex, compareAnswers, finalTieAnswer, step3Rankings, step3CompareIndex, step3StructureChoices, result, existingRecord,
+      page: nextPage,
+      ocrData,
+      verifiedUser,
+      part1Index,
+      part2Index,
+      part1Answers,
+      part2Answers,
+      comparison,
+      compareIndex,
+      compareAnswers,
+      finalTieAnswer,
+      step3Rankings,
+      step3CompareIndex,
+      step3StructureChoices,
+      result,
+      existingRecord,
+      updatedAt: Date.now(),
+      ...overrides,
     });
-  }, [page, ocrData, verifiedUser, part1Index, part2Index, part1Answers, part2Answers, comparison, compareIndex, compareAnswers, finalTieAnswer, step3Rankings, step3CompareIndex, step3StructureChoices, result, existingRecord, isReading]);
+  };
+
+  useEffect(() => {
+    writeJson(SESSION_KEY, {
+      page, ocrData, verifiedUser, part1Index, part2Index, part1Answers, part2Answers,
+      comparison, compareIndex, compareAnswers, finalTieAnswer, step3Rankings, step3CompareIndex, step3StructureChoices, result, existingRecord,
+      updatedAt: Date.now(),
+    });
+  }, [page, ocrData, verifiedUser, part1Index, part2Index, part1Answers, part2Answers, comparison, compareIndex, compareAnswers, finalTieAnswer, step3Rankings, step3CompareIndex, step3StructureChoices, result, existingRecord]);
 
   useEffect(() => {
     if (verifiedUser?.studentId) saveAuth(verifiedUser);
@@ -910,15 +914,6 @@ export default function App() {
     return () => window.clearTimeout(timer);
   }, [verifiedUser, page, part1Answers, part2Answers, comparison, compareAnswers]);
 
-  const handleSelected = async (file) => {
-    setIsReading(true); setProgress(0); setOcrError('');
-    try {
-      const recognized = await recognizeMobileId(file, setProgress);
-      setOcrData(recognized); setPage('review');
-    } catch (error) {
-      console.error(error); setOcrError('이미지를 읽지 못했어요. 선명한 열람증 캡처로 다시 시도해주세요.');
-    } finally { setIsReading(false); }
-  };
 
   const moveAfterDelay = (fn) => window.setTimeout(fn, 150);
 
@@ -1092,6 +1087,7 @@ export default function App() {
       setStep3CompareIndex((i) => i + 1);
       window.scrollTo({ top: 0 });
     } else {
+      persistRecoveryCheckpoint('resultLoading', { step3StructureChoices: next });
       setPage('resultLoading');
       window.scrollTo({ top: 0 });
     }
