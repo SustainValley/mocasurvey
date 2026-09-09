@@ -6,4 +6,5 @@ import './step3Fix.css';
 import './step3ImageFix.css';
 import './offlineParticipationCopy.js';
 import './runtimeAnalytics.js';
+import './shareResult.js';
 createRoot(document.getElementById('root')).render(<App />);
